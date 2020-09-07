@@ -17,9 +17,5 @@ class RoleTableSeeder extends Seeder
         DB::table('roles')->insert([
             'name' => 'ROLE_ADMIN',
         ]);
-
-        DB::table('roles')->insert([
-            'name' => 'ROLE_ESCCORT',
-        ]);
     }
 }
