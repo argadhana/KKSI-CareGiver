@@ -1,15 +1,17 @@
-@extends('layout.layouting')
-@section('title', 'Dashboard')
+@extends('layouts.master')
+{{-- @section('title', 'Dashboard') --}}
 @section('content')
-<div class="container">
+<div class="ml-3 mt-3">
+    <h1>Data Admin</h1>
     <a href="/data-esccort/create" class="btn btn-primary mb-2">Tambah Data Esccort</a>
-  <table class="table table-hover">
+  <table class="table table-bordered">
     <thead>
       <tr>
       	<th>#</th>
         <th>Name</th>
         <th>Phone</th>
         <th>Address</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -17,7 +19,7 @@
 
       <tr>
         <td>{{$k + 1}}</td>
-		<td>{{$data->name}}</td>
+		    <td>{{$data->name}}</td>
         <td>{{$data->phone}}</td>
         <td>{{$data->address}}</td>
 

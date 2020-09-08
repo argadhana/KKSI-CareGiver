@@ -8,13 +8,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('/adminlte/plugins/fontawesome-free/css/all.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('/template/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="{{ asset('/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
+  <link rel="stylesheet" href="{{ asset('/template/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('/adminlte/dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('/template/dist/css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -53,7 +53,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="{{ asset('/adminlte/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('/template/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">AdminLTE 3</span>
       </a>
@@ -81,12 +81,12 @@
                 <p>Dashboard</p>
               </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a href="/role" class="nav-link">
                 <i class="nav-icon fas fa-digital-tachograph"></i>
                 <p>Permintaan Role</p>
               </a>
-            </li>
+            </li> --}}
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-grip-horizontal"></i>
@@ -96,25 +96,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/data/customer" class="nav-link">
+                <a href="/data-customer" class="nav-link">
                   <i class="nav-icon fas fa-caret-right"></i>
                   <p>Data Customer</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/data/cg" class="nav-link">
+                <a href="/data-esccort" class="nav-link">
                   <i class="nav-icon fas fa-caret-right"></i>
-                  <p>Data CG</p>
+                  <p>Data Esccort</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/data/admin" class="nav-link">
+                <a href="/data-admin" class="nav-link">
                   <i class="nav-icon fas fa-caret-right"></i>
                   <p>Data Admin</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/data/lansia" class="nav-link">
+                <a href="/data-lansia" class="nav-link">
                   <i class="nav-icon fas fa-caret-right"></i>
                   <p>Data Lansia</p>
                 </a>
@@ -173,16 +173,16 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="{{ asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{ asset('template/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
-<script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('template/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- DataTables -->
-<script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.js')}}"></script>
-<script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+<script src="{{ asset('template/plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{ asset('template/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('adminlte/dist/js/adminlte.js')}}"></script>
+<script src="{{ asset('template/dist/js/adminlte.js')}}"></script>
 <!-- ChartJS -->
-<script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js')}}"></script>
+<script src="{{ asset('template/plugins/chart.js/Chart.min.js')}}"></script>
 <!-- page script -->
 @yield('script')
 </body>

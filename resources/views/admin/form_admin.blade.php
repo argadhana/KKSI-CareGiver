@@ -1,5 +1,5 @@
-@extends('layout.layouting')
-@section('title', 'Dashboard')
+@extends('layouts.master')
+{{-- @section('title', 'Dashboard') --}}
 @section('content')
   <div class="ml-3 mt-3">
     <div class="card card-primary">

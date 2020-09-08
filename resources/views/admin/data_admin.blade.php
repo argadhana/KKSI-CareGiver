@@ -1,10 +1,10 @@
-@extends('layout.layouting')
-@section('title', 'Dashboard')
+@extends('layouts.master')
+{{-- @section('title', 'Dashboard') --}}
 @section('content')
 <div class="ml-3 mt-3">
-    <h1>Data Items</h1>
+    <h1>Data Admin</h1>
     <a href="/data-admin/create" class="btn btn-primary mb-2">
-      Create New Item
+      Tambah Data Admin
     </a>
     <table class="table table-bordered">
     <thead>
@@ -13,6 +13,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Address</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
