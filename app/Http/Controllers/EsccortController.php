@@ -37,36 +37,28 @@ class EsccortController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         //
-        $request -> validate([
-            'salary' => 'required',
-            'keahlian' => 'required',
-            'name'    => 'required',
-            'age'         => 'required',
-            'address'       => 'required',
-            'gender'        => 'required',
-            'phone'  => 'required',
-            'photo' => 'required|image'
-        ]);
+        $image = $request->file('photo');
 
-        $photo = $request->file('photo');
+        $new_name = 'esccort' . rand(11111, 99999)  . '.' . $image->getClientOriginalExtension();
 
-        $new_name = rand() . '.' . $photo->getClientOriginalExtension();
-        $photo->move(public_path('images'), $new_name);
-            $new_esccort = array(
-                'salary' => $request['salary'],
-                'keahlian' => $request['keahlian'],
-                'name' => $request['name'],
-                'age' => $request['age'],
-                'address' => $request['address'],
-                'gender' => $request['gender'],
-                'phone' => $request['phone'],
-                'photo' => $new_name
-            );
-            Esccort::create($new_esccort);
-            return redirect('/data-esccort');
-    }
+        $image->move(public_path('esccortPhotos'), $new_name);
+
+        $new_esccort = array(
+            'salary' => $request['salary'],
+            'keahlian' => $request['keahlian'],
+            'name' => $request['name'],
+            'age' => $request['age'],
+            'address' => $request['address'],
+            'gender' => $request['gender'],
+            'phone' => $request['phone'],
+            'photo' => $new_name
+        );
+
+        Esccort::create($new_esccort);
+
+        return redirect('/data-esccort');
+}
 
     /**
      * Display the specified resource.

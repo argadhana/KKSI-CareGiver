@@ -22,6 +22,7 @@ class CreateEsccortsTable extends Migration
             $table->string('address');
             $table->string('gender');
             $table->string('phone');
+            $table->string('photo');
             $table->float('rating');
         });
     }

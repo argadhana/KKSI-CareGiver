@@ -8,7 +8,7 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form role="form" action="/data-esccort" method="POST">
+      <form role="form" action="/data-esccort/store" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
           <div class="form-group">
