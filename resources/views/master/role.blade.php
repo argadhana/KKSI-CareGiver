@@ -58,34 +58,34 @@
 </section>
 <!-- /.content -->
 
-<div class="modal fade" id="editRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Role</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            Apakah anda yakin mengganti role user <strong><span class="namauser"></span></strong> dari role <strong><span class="roleawal"></span></strong> ke role <strong><span class="rolesudah"></span></strong>?
-            <div class="form-group mt-3">
-                <select class="form-control" id="statusrole">
-                  <option value="accepted">Konfirmasi</option>
-                  <option value="rejected">Tolak</option>
-                </select>
-            </div>
-            <div id="boxalasan" class="form-group mt-3 d-none">
-                <label for="alasan">Alasan: </label>
-                <textarea class="form-control" id="alasan" rows="3"></textarea>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-        </div>
-</div>
+  <div class="modal fade" id="editRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Role</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Apakah anda yakin mengganti role user <strong><span class="namauser"></span></strong> dari role <strong><span class="roleawal"></span></strong> ke role <strong><span class="rolesudah"></span></strong>?
+              <div class="form-group mt-3">
+                  <select class="form-control" id="statusrole">
+                    <option value="accepted">Konfirmasi</option>
+                    <option value="rejected">Tolak</option>
+                  </select>
+              </div>
+              <div id="boxalasan" class="form-group mt-3 d-none">
+                  <label for="alasan">Alasan: </label>
+                  <textarea class="form-control" id="alasan" rows="3"></textarea>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+          </div>
+  </div>
 </div>
 
 @endsection

@@ -19,6 +19,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('logout', 'Auth\LoginController@logout')->middleware('auth');
+
+Route::get('/dashboard', 'HomeController@index');
+
+Route::redirect('/', '/dashboard');
+Route::redirect('/home', '/dashboard');
+
 Route::get('/data-admin/create', 'AdminController@create'); // menampilkan halaman form
 Route::post('/data-admin', 'AdminController@store'); // menyimpan data
 Route::get('/data-admin', 'AdminController@index'); // menampilkan semua
@@ -30,3 +37,19 @@ Route::delete('/data-admin/{id}', 'AdminController@destroy'); // menghapus data 
 Route::resource('data-role', 'RoleController');
 Route::resource('data-esccort', 'EsccortController');
 Route::post('data-esccort/store', 'EsccortController@store');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => 'lansia'], function () {
+        Route::get('/', 'MasterController@lansia');
+        Route::get('/get', 'MasterController@getDataLansia');
+    });
+    
+    Route::group(['prefix' => 'transaksi'], function () {
+        Route::get('/', 'TransaksiController@index');
+        Route::get('/verifikasi', 'TransaksiController@indexverif');
+        Route::get('/load/{id}', 'TransaksiController@loadid');
+        Route::get('/getpesan', 'TransaksiController@getDataTransaksi');
+        Route::get('/getverif', 'TransaksiController@getDataVerif');
+        Route::post('/pesan', 'TransaksiController@pesan');
+    });
+});

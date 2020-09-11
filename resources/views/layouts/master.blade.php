@@ -114,7 +114,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/data-lansia" class="nav-link">
+                <a href="/data-role" class="nav-link">
+                  <i class="nav-icon fas fa-caret-right"></i>
+                  <p>Data Role</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/lansia" class="nav-link">
                   <i class="nav-icon fas fa-caret-right"></i>
                   <p>Data Lansia</p>
                 </a>
@@ -130,7 +136,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/transaksi/pemesanan" class="nav-link">
+                <a href="/transaksi" class="nav-link">
                   <i class="nav-icon fas fa-caret-right"></i>
                   <p>Pesanan</p>
                 </a>

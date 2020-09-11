@@ -13,15 +13,19 @@ class CreateTransaksiTable extends Migration
      */
     public function up()
     {
-        Schema::create('transaksi', function (Blueprint $table) {
+        Schema::create('transaksis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->dateTime('order_time')->nullable();
+            $table->timestamp('order_time')->useCurrent();
             $table->dateTime('complate_time')->nullable();
+            $table->string('paket')->nullable();
+            $table->string('durasi')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('nomor_telp')->nullable();
+            $table->text('deskripsi_kerja')->nullable();
+            $table->string('total_bayar')->nullable();
             $table->string('status')->nullable();
-            $table->string('total_service')->nullable();
-            $table->string('total_salary')->nullable();
-            $table->text('description')->nullable();
             $table->text('payment')->nullable();
+            $table->string('bukti_foto')->nullable();
         });
     }
 

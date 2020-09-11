@@ -7,12 +7,12 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Data CG</h1>
+        <h1>Data Lansia</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-          <li class="breadcrumb-item active">Data CG</li>
+          <li class="breadcrumb-item active">Data Lansia</li>
         </ol>
       </div>
     </div>
@@ -34,16 +34,17 @@
             <tr>
               <th>ID</th>
               <th>Nama</th>
-              <th>Tempat Lahir</th>
-              <th>Tanggal Lahir</th>
+              {{-- <th>Tempat Lahir</th>
+              <th>Tanggal Lahir</th> --}}
               <th>Usia</th>
-              <th>Alamat</th>
+              {{-- <th>Alamat</th> --}}
               <th>Jenis Kelamin</th>
-              <th>No. HP</th>
+              <th>Hobi</th>
+              {{-- <th>No. HP</th> --}}
               <th>Penyakit Pribadi</th>
-              <th>Token</th>
+              {{-- <th>Token</th>
               <th>Created At</th>
-              <th>Update At</th>
+              <th>Update At</th> --}}
               <th>Aksi</th>
             </tr>
             </thead>
@@ -73,22 +74,20 @@
       selection: true,
       processing: true,
       serverSide: true,
-      ajax: {url: '{{route("ajax.get.data.lansia")}}'},
+      ajax: {url: '/lansia/get'},
       columns: [
-      {data: 'id', name: 'users.id' },
-      {data: 'name', name: 'name' },
-      {data: 'email', name: 'email'},
-      {data: 'name', name: 'name'},
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
+      {data: 'id', name: 'id' },
+      {data: 'nama', name: 'nama' },
+      {data: 'umur', name: 'umur'},
+      {data: 'gender', name: 'name'},
+      {data: 'hobi', name: 'name' },
+      {data: 'riwayat', name: 'name' },
+      {data: 'nama', name: 'nama' },
       ],
+    });
+
+    $(window).bind('resize', function () {
+    oTable.fnAdjustColumnSizing();
     });
   });
 </script>
