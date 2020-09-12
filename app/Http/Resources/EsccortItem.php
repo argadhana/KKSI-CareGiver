@@ -17,6 +17,7 @@ class EsccortItem extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'salary' => $this->salary,
             'keahlian' => $this->keahlian,
             'name' => $this->name,

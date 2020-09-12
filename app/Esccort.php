@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Esccort extends Model
 {
     //
-    protected $guarded = ['id'];
-    protected $filable = ['salary', 'keahlian', 'name', 'age', 'address', 'gender','phone', 'rating','photo'];
+    protected $filable = ['salary', 'keahlian', 'name', 'age', 'address', 'gender','phone','photo'];
     public $timestamps = false;
 }
