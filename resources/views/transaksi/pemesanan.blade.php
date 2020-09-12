@@ -126,6 +126,7 @@
             <input type="text" class="form-control" id="recipient-name" name="bayar">
           </div>
           <input id="idlansia" name="idlansia" type="hidden" value="">
+          <input id="idesccort" name="idesccort" type="hidden" value="1">
           <input id="iduser" name="iduser" type="hidden" value="{{auth()->user()->id}}">
       </div>
       <div class="modal-footer">
@@ -148,7 +149,7 @@
             url:"transaksi/load/"+id,
             dataType:"json",
             success:function(html){
-              if (html.success == '[]') {
+              if (html.success !== '[]') {
                 $('#formtambah')[0].reset();          
                 $('#tnama').val(html.success.nama);
                 $('#tumur').val(html.success.umur);

@@ -84,12 +84,19 @@ class TransaksiController extends Controller
             $transaksi->alamat = $request->alamat;
             $transaksi->nomor_telp = $request->nomor;
             $transaksi->deskripsi_kerja = $request->deskripsi;
-            $transaksi->total_bayar = $request->bayar;
             $transaksi->user_id = $request->iduser;
-            // $transaksi->esccort_id = $request->idesccort;
-            $transaksi->esccort_id = '1';
+            $transaksi->esccort_id = $request->idesccort;
+            // $transaksi->esccort_id = '1';
             $transaksi->lansia_id = $idlansia;
             $transaksi->status = 'belum';
+
+            if ($request->paket == "bulanan") {
+                $total = $request->durasi * 2000000;
+            }if ($request->paket == "harian") {
+                $total = $request->durasi * 150000;
+            }
+            $transaksi->total_bayar = $total;
+
             $transaksi->save();
             
             return response()->json(['success' => "horee"], $this->successStatus);

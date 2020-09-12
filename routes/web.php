@@ -38,6 +38,11 @@ Route::resource('data-role', 'RoleController');
 Route::resource('data-esccort', 'EsccortController');
 Route::post('data-esccort/store', 'EsccortController@store');
 
+Route::group(['prefix' => 'api'], function () {
+    Route::post('/pesan', 'TransaksiController@pesan');
+    Route::get('/load/{id}', 'TransaksiController@loadid');
+});
+
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'lansia'], function () {
         Route::get('/', 'MasterController@lansia');
@@ -47,9 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'transaksi'], function () {
         Route::get('/', 'TransaksiController@index');
         Route::get('/verifikasi', 'TransaksiController@indexverif');
-        Route::get('/load/{id}', 'TransaksiController@loadid');
         Route::get('/getpesan', 'TransaksiController@getDataTransaksi');
         Route::get('/getverif', 'TransaksiController@getDataVerif');
-        Route::post('/pesan', 'TransaksiController@pesan');
     });
 });
