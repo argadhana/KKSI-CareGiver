@@ -110,8 +110,8 @@
       {data: 'total_bayar', name: 'total_bayar' },
       {data: 'name', name: 'name.users' },
       {data: 'nama', name: 'nama.lansias' },
-      {data: 'name', name: 'name.esccorts' },
-      {data: 'status', name: 'status' },
+      {data: 'esccort_name', name: 'esccort_name' },
+      {data: 'nama', name: 'status' },
       ],
       rowId: 'id'
     });

@@ -25,6 +25,7 @@ class EsccortItem extends JsonResource
             'gender' => $this->gender,
             'phone' => $this->phone,
             'rating' => $this->rating,
+            'photo' => $this->photo,
         ];
     }
 }

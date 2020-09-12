@@ -27,7 +27,8 @@ class TransaksiController extends Controller
             $transaksi = Transaksi::select('*')
             ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
             ->join('users', 'transaksis.user_id', '=', 'users.id')
-            ->join('lansias', 'transaksis.lansia_id', '=', 'lansias.id');
+            ->join('lansias', 'transaksis.lansia_id', '=', 'lansias.id')
+            ->select('esccorts.name AS esccort_name','transaksis.*','users.*','lansias.*');
             return Datatables::of($transaksi)
                 ->make(true);
         }
@@ -39,6 +40,7 @@ class TransaksiController extends Controller
             ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
             ->join('users', 'transaksis.user_id', '=', 'users.id')
             ->join('lansias', 'transaksis.lansia_id', '=', 'lansias.id')
+            ->select('esccorts.name AS esccort_name','transaksis.*','users.*','lansias.*')
             ->where('status','belum');
             return Datatables::of($transaksi)
                 ->make(true);
@@ -100,6 +102,60 @@ class TransaksiController extends Controller
             $transaksi->save();
             
             return response()->json(['success' => "horee"], $this->successStatus);
+        }
+    }
+    public function statusBelum()
+    {
+        if(request()->ajax())
+        {
+            $transaksi = Transaksi::where('status','belum')->get();
+        
+            return response()->json(['success' => $transaksi], $this->successStatus);
+        }
+    }
+    public function statusMenunggu()
+    {
+        if(request()->ajax())
+        {
+            $transaksi = Transaksi::where('status','menunggu')->get();
+        
+            return response()->json(['success' => $transaksi], $this->successStatus);
+        }
+    }
+    public function statusDikonfirmasi()
+    {
+        if(request()->ajax())
+        {
+            $transaksi = Transaksi::where('status','dikonfimasi')->get();
+        
+            return response()->json(['success' => $transaksi], $this->successStatus);
+        }
+    }
+    public function statusMerawat()
+    {
+        if(request()->ajax())
+        {
+            $transaksi = Transaksi::where('status','merawat')->get();
+        
+            return response()->json(['success' => $transaksi], $this->successStatus);
+        }
+    }
+    public function statusDitolak()
+    {
+        if(request()->ajax())
+        {
+            $transaksi = Transaksi::where('status','ditolak')->get();
+        
+            return response()->json(['success' => $transaksi], $this->successStatus);
+        }
+    }
+    public function statusDiterima()
+    {
+        if(request()->ajax())
+        {
+            $transaksi = Transaksi::where('status','diterima')->get();
+        
+            return response()->json(['success' => $transaksi], $this->successStatus);
         }
     }
 }

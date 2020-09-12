@@ -15,9 +15,9 @@ class CreateEsccortsTable extends Migration
     {
         Schema::create('esccorts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->string('salary');
             $table->text('keahlian');
-            $table->string('name');
             $table->string('age');
             $table->string('address');
             $table->string('gender');

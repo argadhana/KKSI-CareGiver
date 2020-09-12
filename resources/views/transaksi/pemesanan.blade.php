@@ -146,7 +146,7 @@
     $('#buttona').click(function () {
         // console.log(id);
         $.ajax({
-            url:"transaksi/load/"+id,
+            url:"api/status/belum",
             dataType:"json",
             success:function(html){
               if (html.success !== '[]') {
@@ -171,7 +171,7 @@
       e.preventDefault();
       // console.log(id);
       $.ajax({
-        url:"/transaksi/pesan",
+        url:"/api/pesan",
         method:"POST",
         data: new FormData(this),
         contentType: false,
@@ -203,7 +203,7 @@
       {data: 'total_bayar', name: 'total_bayar' },
       {data: 'name', name: 'name.users' },
       {data: 'nama', name: 'nama.lansias' },
-      {data: 'name', name: 'name.esccorts' },
+      {data: 'esccort_name', name: 'esccort_name' },
       {data: 'status', name: 'status' },
       ],
     });
