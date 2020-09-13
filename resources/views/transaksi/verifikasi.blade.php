@@ -71,6 +71,7 @@
           <span aria-hidden="true">&times;</span>
           </button>
       </div>
+      <form id="formverifikasi" method="POST" enctype="multipart/form-data">
       <div class="modal-body">
           apakah anda yakin mengganti status <strong>transaksi(id  <span id="idtrans"></span>)</strong> dengan :
           <div class="form-group mt-3">
@@ -79,11 +80,23 @@
                 <option value="tolak">Tolak</option>
               </select>
           </div>
+            @csrf
+          <div class="form-group">
+            <input id="idtransaksi" name="id" type="hidden" value="">
+            <label for="photo">Photo</label>
+            <input type="file" class="form-control" id="photo" name="bukti_foto" placeholder="Photo">
+          </div>
+            
+            <input id="idlansia" name="idlansia" type="hidden" value="">
+            <input id="idesccort" name="idesccort" type="hidden" value="1">
+            <input id="iduser" name="iduser" type="hidden" value="{{auth()->user()->id}}">
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" id="submitform" class="btn btn-primary">Save changes</button>
       </div>
+    </form>
+
       </div>
 </div>
 </div>
@@ -100,7 +113,7 @@
       serverSide: true,
       ajax: {url: '/transaksi/getverif'},
       columns: [
-      {data: 'id', name: 'transaksis.id' },
+      {data: 'idtrans', name: 'idtrans' },
       {data: 'order_time', name: 'order_time' },
       {data: 'paket', name: 'paket'},
       {data: 'durasi', name: 'durasi'},
@@ -111,15 +124,18 @@
       {data: 'name', name: 'name.users' },
       {data: 'nama', name: 'nama.lansias' },
       {data: 'esccort_name', name: 'esccort_name' },
-      {data: 'nama', name: 'status' },
+      {data: 'status', name: 'status' },
       ],
       rowId: 'id'
     });
+
+    var id;
 
     $('#tableVerifikasi tbody').on( 'click', 'tr', function () {
         var id = table.row( this ).id();
         console.log('anjay');
         $('#idtrans').text(id);
+        $('#idtransaksi').val(id);
         $('#confirmStatus').modal('show');
         // $.ajax({
         //     url:"role/edit/"+id,
@@ -134,6 +150,23 @@
         // })
     } );
 
+    $('#formverifikasi').submit(function(e) {
+      e.preventDefault();
+      // console.log(id);
+      $.ajax({
+        url:"/api/uploadbukti",
+        method:"POST",
+        data: new FormData(this),
+        contentType: false,
+        cache:false,
+        processData: false,
+        dataType:"json",
+          success:function(html){
+            
+          alert('');
+          }
+      })
+    } );
 
   });
 </script>

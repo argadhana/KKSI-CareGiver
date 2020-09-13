@@ -71,7 +71,7 @@
 <div class="modal fade" id="tambaht" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form id="formtambah" method="POST">
+    <form id="formtambah" method="POST">
           @csrf
       <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edit Role</h5>
@@ -193,7 +193,7 @@
       serverSide: true,
       ajax: {url: '/transaksi/getpesan'},
       columns: [
-      {data: 'id', name: 'transaksis.id' },
+      {data: 'idtrans', name: 'idtrans' },
       {data: 'order_time', name: 'order_time' },
       {data: 'paket', name: 'paket'},
       {data: 'durasi', name: 'durasi'},

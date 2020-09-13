@@ -28,7 +28,7 @@ class TransaksiController extends Controller
             ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
             ->join('users', 'transaksis.user_id', '=', 'users.id')
             ->join('lansias', 'transaksis.lansia_id', '=', 'lansias.id')
-            ->select('esccorts.name AS esccort_name','transaksis.*','users.*','lansias.*');
+            ->select('esccorts.name AS esccort_name','transaksis.id AS idtrans','transaksis.*','users.*','lansias.*');
             return Datatables::of($transaksi)
                 ->make(true);
         }
@@ -40,7 +40,7 @@ class TransaksiController extends Controller
             ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
             ->join('users', 'transaksis.user_id', '=', 'users.id')
             ->join('lansias', 'transaksis.lansia_id', '=', 'lansias.id')
-            ->select('esccorts.name AS esccort_name','transaksis.*','users.*','lansias.*')
+            ->select('esccorts.name AS esccort_name','transaksis.id AS idtrans','transaksis.*','users.*','lansias.*')
             ->where('status','belum');
             return Datatables::of($transaksi)
                 ->make(true);
@@ -156,6 +156,27 @@ class TransaksiController extends Controller
             $transaksi = Transaksi::where('status','diterima')->get();
         
             return response()->json(['success' => $transaksi], $this->successStatus);
+        }
+    }
+    public function uploadBuktiTransaksi(Request $request)
+    {
+        if(request()->ajax())
+        {
+            // $transaksi = Transaksi::where('id', $request->id)->get();
+            $image = $request->file('bukti_foto');
+
+            $new_name = 'buktitransaksi' . $request->id . '-' . rand(11111, 99999)  . '.' . $image->getClientOriginalExtension();
+
+            $image->move(public_path('buktiPhotos'), $new_name); 
+
+            $transaksi = array(
+                'status' => 'menunggu',
+                'bukti_foto' => $new_name,
+            );
+
+            Transaksi::whereId($request->id)->update($transaksi);
+
+            return response()->json(['success' => 'qamu berhasil dech'], $this->successStatus);
         }
     }
 }

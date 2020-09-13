@@ -41,6 +41,7 @@ Route::post('data-esccort/store', 'EsccortController@store');
 Route::group(['prefix' => 'api'], function () {
     Route::post('/pesan', 'TransaksiController@pesan');
     Route::get('/load/{id}', 'TransaksiController@loadid');
+    Route::post('/uploadbukti', 'TransaksiController@uploadBuktiTransaksi');
 
     Route::group(['prefix' => 'status'], function () {
         Route::get('/menunggu', 'TransaksiController@statusMenunggu');
