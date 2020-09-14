@@ -51,132 +51,125 @@ class TransaksiController extends Controller
 
     public function loadid($id)
     {
-        if(request()->ajax())
-        {
-            $transaksi = Transaksi::where('user_id',$id)->get();
-            if ($transaksi == '[]') {
-                return response()->json(['success' => ""], 202);
-            }else{
-                $idlansia = $transaksi[0]['lansia_id'];
-                $lansia = Lansia::find($idlansia);
-                return response()->json(['success' => $lansia], $this->successStatus);
-            }
+        $transaksi = Transaksi::where('user_id',$id)->get();
+        if ($transaksi == '[]') {
+            return response()->json(['success' => ""], 202);
+        }else{
+            $idlansia = $transaksi[0]['lansia_id'];
+            $lansia = Lansia::find($idlansia);
+            return response()->json(['success' => $lansia], $this->successStatus);
         }
     }
     public function pesan(Request $request)
     {
-        if(request()->ajax())
-        {
-            if ($request->idlansia == '') {
-                $escort = new Lansia;
-                $escort->nama = $request->nama;
-                $escort->umur = $request->umur;
-                $escort->gender = $request->gender;
-                $escort->hobi = $request->hobi;
-                $escort->riwayat = $request->riwayat;
-                $escort->save();
-                $idlansia = $escort->id;
-            } else {
-                $idlansia = $request->idlansia;
-            }
+        if ($request->idlansia == '') {
+            $escort = new Lansia;
+            $escort->nama = $request->nama;
+            $escort->umur = $request->umur;
+            $escort->gender = $request->gender;
+            $escort->hobi = $request->hobi;
+            $escort->riwayat = $request->riwayat;
+            $escort->save();
+            $idlansia = $escort->id;
+        } else {
+            $idlansia = $request->lansia_id;
+        }
 
-            $transaksi = new Transaksi;
-            $transaksi->paket = $request->paket;
-            $transaksi->durasi = $request->durasi;
-            $transaksi->alamat = $request->alamat;
-            $transaksi->nomor_telp = $request->nomor;
-            $transaksi->deskripsi_kerja = $request->deskripsi;
-            $transaksi->user_id = $request->iduser;
-            $transaksi->esccort_id = $request->idesccort;
-            // $transaksi->esccort_id = '1';
-            $transaksi->lansia_id = $idlansia;
-            $transaksi->status = 'belum';
+        $transaksi = new Transaksi;
+        $transaksi->paket = $request->paket;
+        $transaksi->durasi = $request->durasi;
+        $transaksi->alamat = $request->alamat;
+        $transaksi->nomor_telp = $request->nomor_telp;
+        $transaksi->deskripsi_kerja = $request->deskripsi_kerja;
+        $transaksi->user_id = $request->user_id;
+        $transaksi->esccort_id = $request->esccort_id;
+        // $transaksi->esccort_id = '1';
+        $transaksi->lansia_id = $idlansia;
+        $transaksi->status = 'belum';
 
-            if ($request->paket == "bulanan") {
-                $total = $request->durasi * 2000000;
-            }if ($request->paket == "harian") {
-                $total = $request->durasi * 150000;
-            }
-            $transaksi->total_bayar = $total;
+        if ($request->paket == "bulanan") {
+            $total = $request->durasi * 2000000;
+        }if ($request->paket == "harian") {
+            $total = $request->durasi * 150000;
+        }
+        $transaksi->total_bayar = $total;
 
-            $transaksi->save();
-            
-            return response()->json(['success' => "horee"], $this->successStatus);
-        }
-    }
-    public function statusBelum()
-    {
-        if(request()->ajax())
-        {
-            $transaksi = Transaksi::where('status','belum')->get();
+        $transaksi->save();
         
-            return response()->json(['success' => $transaksi], $this->successStatus);
-        }
+        return response()->json(['success' => $transaksi]);
     }
-    public function statusMenunggu()
+    public function statusBelum($id)
     {
-        if(request()->ajax())
-        {
-            $transaksi = Transaksi::where('status','menunggu')->get();
-        
-            return response()->json(['success' => $transaksi], $this->successStatus);
-        }
+        $transaksi = Transaksi::where('user_id',$id)->where('status','belum')->get();
+    
+        return response()->json(['success' => $transaksi], $this->successStatus);
     }
-    public function statusDikonfirmasi()
+    public function statusMenunggu($id)
     {
-        if(request()->ajax())
-        {
-            $transaksi = Transaksi::where('status','dikonfimasi')->get();
-        
-            return response()->json(['success' => $transaksi], $this->successStatus);
-        }
+        $transaksi = Transaksi::where('user_id',$id)->where('status','menunggu')->get();
+    
+        return response()->json(['success' => $transaksi], $this->successStatus);
     }
-    public function statusMerawat()
+    public function statusDikonfirmasi($id)
     {
-        if(request()->ajax())
-        {
-            $transaksi = Transaksi::where('status','merawat')->get();
-        
-            return response()->json(['success' => $transaksi], $this->successStatus);
-        }
+        $transaksi = Transaksi::where('user_id',$id)->where('status','dikonfimasi')->get();
+    
+        return response()->json(['success' => $transaksi], $this->successStatus);
     }
-    public function statusDitolak()
+    public function statusMerawat($id)
     {
-        if(request()->ajax())
-        {
-            $transaksi = Transaksi::where('status','ditolak')->get();
+        $transaksi = Transaksi::where('user_id',$id)->where('status','merawat')->get();
         
-            return response()->json(['success' => $transaksi], $this->successStatus);
-        }
+        return response()->json(['success' => $transaksi], $this->successStatus);
     }
-    public function statusDiterima()
+    public function statusDitolak($id)
     {
-        if(request()->ajax())
-        {
-            $transaksi = Transaksi::where('status','diterima')->get();
+        $transaksi = Transaksi::where('user_id',$id)->where('status','ditolak')->get();
+    
+        return response()->json(['success' => $transaksi], $this->successStatus);
+    }
+    public function statusDiterima($id)
+    {
+        $transaksi = Transaksi::where('user_id',$id)->where('status','diterima')->get();
         
-            return response()->json(['success' => $transaksi], $this->successStatus);
-        }
+        return response()->json(['success' => $transaksi], $this->successStatus);
     }
     public function uploadBuktiTransaksi(Request $request)
     {
-        if(request()->ajax())
-        {
-            // $transaksi = Transaksi::where('id', $request->id)->get();
-            $image = $request->file('bukti_foto');
+        // $transaksi = Transaksi::where('id', $request->id)->get();
+        $image = $request->file('bukti_foto');
 
-            $new_name = 'buktitransaksi' . $request->id . '-' . rand(11111, 99999)  . '.' . $image->getClientOriginalExtension();
+        $new_name = 'buktitransaksi' . $request->id . '-' . rand(11111, 99999)  . '.' . $image->getClientOriginalExtension();
 
-            $image->move(public_path('buktiPhotos'), $new_name); 
+        $image->move(public_path('buktiPhotos'), $new_name); 
 
-            $transaksi = array(
-                'status' => 'menunggu',
-                'bukti_foto' => $new_name,
-            );
+        $transaksi = array(
+            'status' => 'menunggu',
+            'bukti_foto' => $new_name,
+        );
 
-            Transaksi::whereId($request->id)->update($transaksi);
+        Transaksi::whereId($request->id)->update($transaksi);
 
-            return response()->json(['success' => 'qamu berhasil dech'], $this->successStatus);
-        }
+        return response()->json(['success' => 'qamu berhasil dech'], $this->successStatus);
+    }
+    public function loadTransaksi($id)
+    {
+        $transaksidetail = Transaksi::where('transaksis.id',$id)
+        ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
+        ->join('users', 'transaksis.user_id', '=', 'users.id')
+        ->join('lansias', 'transaksis.lansia_id', '=', 'lansias.id')
+        ->select('esccorts.name AS esccort_name',
+        'users.name AS user_name',
+        'lansias.nama AS lansia_name',
+        'transaksis.id AS transaksi_id',
+        'esccorts.id AS esccort_id',
+        'lansias.id AS lansia_id',
+        'transaksis.*',
+        'esccorts.*',
+        'lansias.*',
+        'users.*')
+        ->get();
+
+        return response()->json(['success' => $transaksidetail]);
     }
 }

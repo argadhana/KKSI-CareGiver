@@ -39,19 +39,7 @@ Route::resource('data-esccort', 'EsccortController');
 Route::post('data-esccort/store', 'EsccortController@store');
 
 Route::group(['prefix' => 'api'], function () {
-    Route::post('/pesan', 'TransaksiController@pesan');
-    Route::get('/load/{id}', 'TransaksiController@loadid');
-    Route::post('/uploadbukti', 'TransaksiController@uploadBuktiTransaksi');
-
-    Route::group(['prefix' => 'status'], function () {
-        Route::get('/menunggu', 'TransaksiController@statusMenunggu');
-        Route::get('/dikonfimasi', 'TransaksiController@statusDikonfimasi');
-        Route::get('/belum', 'TransaksiController@statusBelum');
-        Route::get('/merawat', 'TransaksiController@statusMerawat');
-        Route::get('/ditolak', 'TransaksiController@statusDitolak');
-        Route::get('/diterima', 'TransaksiController@statusDiterima');
-        
-    });
+    
 });
 
 Route::group(['middleware' => ['auth']], function () {
