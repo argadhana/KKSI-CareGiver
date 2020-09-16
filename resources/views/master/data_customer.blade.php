@@ -23,7 +23,7 @@
 <section class="content">
   <div class="row">
     <div class="col-12">
-      
+
       <!-- /.card -->
 
       <div class="card">
@@ -36,14 +36,10 @@
               <th>Nama</th>
               <th>Email</th>
               <th>Password</th>
-              <th>Tempat Lahir</th>
-              <th>Tanggal Lahir</th>
+              <th>Umur</th>
+              <th>Alamat</th>
               <th>Jenis Kelamin</th>
               <th>No. HP</th>
-              <th>Photo</th>
-              <th>Token</th>
-              <th>Created At</th>
-              <th>Update At</th>
               <th>Aksi</th>
             </tr>
             </thead>
@@ -73,22 +69,20 @@
       selection: true,
       processing: true,
       serverSide: true,
-      ajax: {url: '{{route("ajax.get.data.customer")}}'},
+      ajax: {url: '/customer/get'},
       columns: [
-      {data: 'id', name: 'users.id' },
+      {data: 'id', name: 'id' },
       {data: 'name', name: 'name' },
       {data: 'email', name: 'email'},
-      {data: 'name', name: 'name'},
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
-      {data: 'name', name: 'name' },
+      {data: 'password', name: 'password'},
+      {data: 'age', name: 'age' },
+      {data: 'address', name: 'address' },
+      {data: 'gender', name: 'gener' },
+      {data: 'phone', name: 'phone' },
       ],
+    });
+    $(window).bind('resize', function () {
+    oTable.fnAdjustColumnSizing();
     });
   });
 </script>

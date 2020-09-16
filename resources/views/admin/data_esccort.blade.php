@@ -2,7 +2,7 @@
 {{-- @section('title', 'Dashboard') --}}
 @section('content')
 <div class="ml-3 mt-3">
-    <h1>Data Admin</h1>
+    <h1>Data Esccort</h1>
     <a href="/data-esccort/create" class="btn btn-primary mb-2">Tambah Data Esccort</a>
   <table class="table table-bordered">
     <thead>
@@ -24,13 +24,13 @@
         <td>{{$data->address}}</td>
 
 		<td>
-			<a href="#" class="btn btn-info">Info</a>
-			<a href="#" class="btn btn-warning">Edit</a>
-      <form action="#" method="post" style="display: inline;">
+        <a href="/data-esccort/{{$data->id}}" class="btn btn-info">Info</a>
+			<a href="/data-esccort/{{$data->id}}/edit" class="btn btn-warning">Edit</a>
+        <form action="/data-esccort/{{$data->id}}" method="post" style="display: inline;">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger">Delete</button>
-      </form>
+        </form>
 		</td>
       </tr>
 

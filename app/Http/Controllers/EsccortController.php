@@ -4,8 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Esccort;
+use App\Models\EsccortModel;
 class EsccortController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:ROLE_ADMIN');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -68,7 +74,10 @@ class EsccortController extends Controller
      */
     public function show($id)
     {
-        //
+
+            $esccort = Esccort::find($id);
+            return view('admin.show_esccort', compact('esccort'));
+
     }
 
     /**
@@ -80,6 +89,8 @@ class EsccortController extends Controller
     public function edit($id)
     {
         //
+        $esccort = EsccortModel::find_by_id($id);
+        return view ('admin.edit_esccort', compact('esccort'));
     }
 
     /**
@@ -92,6 +103,9 @@ class EsccortController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $esccort = Esccort::update($id, $request->all());
+        return redirect('/data-esccort');
+
     }
 
     /**
@@ -100,8 +114,8 @@ class EsccortController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        $deleted = EsccortModel::destroy($id);
+        return redirect('/data-esccort');
     }
 }
