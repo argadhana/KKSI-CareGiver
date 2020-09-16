@@ -55,7 +55,6 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-    </div>
     <!-- /.col -->
   </div>
   <!-- /.row -->
@@ -66,27 +65,30 @@
   <div class="modal-dialog" role="document">
       <div class="modal-content">
       <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Edit Role</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
       </div>
-      <form id="formverifikasi" method="POST" enctype="multipart/form-data">
+      <form id="formverifikasi" method="POST">
       <div class="modal-body">
           apakah anda yakin mengganti status <strong>transaksi(id  <span id="idtrans"></span>)</strong> dengan :
           <div class="form-group mt-3">
-              <select class="form-control" id="statusrole">
-                <option value="terima">Konfirmasi</option>
-                <option value="tolak">Tolak</option>
+              <select class="form-control" id="status" name="status">
+                <option value="belum">Belum Membayar</option>
+                <option value="menunggu">Menunggu Konfirmasi</option>
+                <option value="dikonfirmasi">DiKonfirmasi</option>
+                <option value="merawat">Sedang Merawat</option>
+                <option value="ditolak">Ditolak</option>
+                <option value="diterima">Diterima</option>
               </select>
           </div>
             @csrf
-          <div class="form-group">
-            <input id="idtransaksi" name="id" type="hidden" value="">
+          {{-- <div class="form-group">
             <label for="photo">Photo</label>
             <input type="file" class="form-control" id="photo" name="bukti_foto" placeholder="Photo">
-          </div>
-            
+          </div> --}}
+            <input id="idtransaksi" name="id" type="hidden" value="">
             <input id="idlansia" name="idlansia" type="hidden" value="">
             <input id="idesccort" name="idesccort" type="hidden" value="1">
             <input id="iduser" name="iduser" type="hidden" value="{{auth()->user()->id}}">
@@ -100,11 +102,24 @@
       </div>
 </div>
 </div>
-
+<div class="toast" id="toastberhasil" data-delay="10000" style="position: absolute; top: 100px; right: 50px;">
+  <div class="toast-header">
+    <strong class="mr-auto">Notice</strong>
+    {{-- <small>11 mins ago</small> --}}
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    Berhasil, Men-update Data.
+  </div>
+</div>
 @endsection
 @section('script')
 <script>
   $(function () {
+    $('.toast').toast({delay:5000})
+
     var table = $('#tableVerifikasi').DataTable({
       scrollX: true,
       autoWidth: false,
@@ -126,6 +141,7 @@
       {data: 'esccort_name', name: 'esccort_name' },
       {data: 'status', name: 'status' },
       ],
+      order: [ 1, "desc" ],
       rowId: 'id'
     });
 
@@ -154,7 +170,7 @@
       e.preventDefault();
       // console.log(id);
       $.ajax({
-        url:"/api/uploadbukti",
+        url:"/updatestatus",
         method:"POST",
         data: new FormData(this),
         contentType: false,
@@ -162,8 +178,10 @@
         processData: false,
         dataType:"json",
           success:function(html){
-            
-          alert('');
+          $('#toastberhasil').toast('show')
+          $('#confirmStatus').modal('hide');
+          alert(html.success);
+          table.ajax.reload();
           }
       })
     } );

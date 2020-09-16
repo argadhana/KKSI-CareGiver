@@ -32,7 +32,7 @@
         </button>
         <!-- /.card-header -->
         <div class="card-body">
-          <table id="tableTransaksi" class="table table-bordered table-hover small" style="text-size:11px; width:100%;">
+          <table id="tableTransaksi" class="table table-bordered small" style="text-size:11px; width:100%;">
             <thead>
             <tr>
               <th>ID</th>
@@ -74,60 +74,65 @@
     <form id="formtambah" method="POST">
           @csrf
       <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Edit Role</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
       </div>
       <div class="modal-body">
-        
+          <div class="form-group">
+            <select class="form-control" name="lansiauses" id="lansiauses">
+              <option value="lama" id="optionlama">Gunakan Data Lama</option>
+              <option value="baru" id="optionbaru">Gunakan Data Baru</option>
+            </select>
+          </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Nama Lansia:</label>
-            <input type="text" class="form-control" id="tnama" name="nama">
+            <input type="text" class="form-control forminput forminputlansia" id="tnama" name="nama">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">umur:</label>
-            <input type="text" class="form-control" id="tumur" name="umur">
+            <input type="text" class="form-control forminput forminputlansia" id="tumur" name="umur">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">gender:</label>
-            <input type="text" class="form-control" id="tgender" name="gender">
+            <input type="text" class="form-control forminput forminputlansia" id="tgender" name="gender">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">hobi:</label>
-            <input type="text" class="form-control" id="thobi" name="hobi">
+            <input type="text" class="form-control forminput forminputlansia" id="thobi" name="hobi">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">riwayat:</label>
-            <input type="text" class="form-control" id="triwayat" name="riwayat">
+            <input type="text" class="form-control forminput forminputlansia" id="triwayat" name="riwayat">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">paket:</label>
-            <input type="text" class="form-control" id="tpaket" name="paket">
+            <input type="text" class="form-control forminput " id="tpaket" name="paket">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">durasi:</label>
-            <input type="text" class="form-control" id="tdurasi-name" name="durasi">
+            <input type="text" class="form-control forminput " id="tdurasi-name" name="durasi">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">alamat:</label>
-            <input type="text" class="form-control" id="recipient-name" name="alamat">
+            <input type="text" class="form-control forminput " id="recipient-name" name="alamat">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">nomor:</label>
-            <input type="text" class="form-control" id="recipient-name" name="nomor">
+            <input type="text" class="form-control forminput " id="recipient-name" name="nomor_telp">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">deskripsi:</label>
-            <input type="text" class="form-control" id="recipient-name" name="deskripsi">
+            <input type="text" class="form-control forminput" id="recipient-name" name="deskripsi_kerja">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">harga:</label>
-            <input type="text" class="form-control" id="recipient-name" name="bayar">
+            <input type="text" class="form-control forminput" id="recipient-name" name="bayar">
           </div>
-          <input id="idlansia" name="idlansia" type="hidden" value="">
-          <input id="idesccort" name="idesccort" type="hidden" value="1">
-          <input id="iduser" name="iduser" type="hidden" value="{{auth()->user()->id}}">
+          <input id="idlansia" name="lansia_id" type="hidden" value="">
+          <input id="idesccort" name="esccort_id" type="hidden" value="1">
+          <input id="iduser" name="user_id" type="hidden" value="{{auth()->user()->id}}">
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -141,31 +146,48 @@
 @endsection
 @section('script')
 <script>
-  $(function () {
-    id = $("#iduser").val();
-    $('#buttona').click(function () {
-        // console.log(id);
+
+  function ajaxload() {
         $.ajax({
-            url:"api/status/belum",
+            url:"api/load/"+id,
             dataType:"json",
             success:function(html){
               if (html.success !== '[]') {
-                $('#formtambah')[0].reset();          
+                // $('.forminput')[0].reset();          
                 $('#tnama').val(html.success.nama);
                 $('#tumur').val(html.success.umur);
                 $('#tgender').val(html.success.gender);
                 $('#thobi').val(html.success.hobi);
                 $('#triwayat').val(html.success.riwayat);
                 $('#idlansia').val(html.success.id);
+                $('.forminputlansia').attr('readonly',true);
                 $('#tambaht').modal('show')
               }
               else {
+                $('.forminputlansia').attr('readonly',false);
                 $('#tambaht').modal('show')
               }
             // alert( 'ini adalah '+html.data[0].name );
             }
-        })
+        })   
+      }
+
+  $(function () {
+    id = $("#iduser").val();
+    $('#buttona').click(function () {
+        // console.log(id);
+      ajaxload();
     } );
+    
+    $('#lansiauses').change(function(){
+        if($(this).val() == 'baru'){
+          $('.forminputlansia').attr('readonly',false);
+          $('.forminput').val('');
+        }
+        if($(this).val() == 'lama'){
+            ajaxload();
+        }
+    });
 
   $('#formtambah').submit(function(e) {
       e.preventDefault();
@@ -185,7 +207,7 @@
       })
   } );
 
-    $('#tableTransaksi').DataTable({
+    table = $('#tableTransaksi').DataTable({
       scrollX: true,
       autoWidth: false,
       selection: true,
@@ -209,7 +231,7 @@
     });
     
     $(window).bind('resize', function () {
-    oTable.fnAdjustColumnSizing();
+    Table.fnAdjustColumnSizing();
     });
   });
 </script>

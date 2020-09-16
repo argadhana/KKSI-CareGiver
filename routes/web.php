@@ -37,6 +37,7 @@ Route::delete('/data-admin/{id}', 'AdminController@destroy'); // menghapus data 
 Route::resource('data-role', 'RoleController');
 Route::resource('data-esccort', 'EsccortController');
 Route::post('data-esccort/store', 'EsccortController@store');
+Route::post('updatestatus', 'TransaksiController@updatestatus');
 
 Route::group(['prefix' => 'api'], function () {
     
