@@ -2,8 +2,7 @@
 {{-- @section('title', 'Dashboard') --}}
 @section('content')
 <div class="ml-3 mt-3">
-    <h1>Data Customer</h1>
-    <a href="/data-customer/create" class="btn btn-primary mb-2">Tambah Data Esccort</a>
+    <h1>Data Cutomers</h1>
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -19,18 +18,12 @@
 
       <tr>
         <td>{{$k + 1}}</td>
-		<td>{{$data->name}}</td>
+		    <td>{{$data->name}}</td>
         <td>{{$data->phone}}</td>
         <td>{{$data->address}}</td>
 
 		<td>
-			<a href="#" class="btn btn-info">Info</a>
-			<a href="#" class="btn btn-warning">Edit</a>
-      <form action="#" method="post" style="display: inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger">Delete</button>
-      </form>
+			<a href="/data-customer/{{$data->id}}" class="btn btn-info">Info</a>
 		</td>
       </tr>
 

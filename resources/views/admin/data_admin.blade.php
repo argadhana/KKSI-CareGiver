@@ -26,9 +26,7 @@
         <td>{{$data->address}}</td>
 
 		<td>
-			<a href="#" class="btn btn-info">Info</a>
-			<a href="#" class="btn btn-warning">Edit</a>
-      <form action="#" method="post" style="display: inline;">
+      <form action="/data-admin/{{$data->id}}" method="post" style="display: inline;">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger">Delete</button>

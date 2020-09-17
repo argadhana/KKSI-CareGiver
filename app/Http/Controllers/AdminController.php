@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
-use App\User;
+use App\Models\RoleUser;
 use App\Role;
-
+use App\User;
 
 class AdminController extends Controller
 {
@@ -37,7 +37,8 @@ class AdminController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('admin.form_admin', compact('roles'));
+        $users = User::all();
+        return view('admin.form_admin', compact('roles', 'users'));
     }
 
     /**
@@ -49,13 +50,8 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        $new_admin = User::create([
-            "name" => $request["name"],
-            "email" => $request["email"],
-            "password" => $request["password"],
-            "age" => $request["age"],
-            "address" => $request["gender"],
-            "phone" => $request["phone"],
+        $new_admin = RoleUser::create([
+            "user_id" => $request["user_id"],
             "role_id" => $request["role_id"]
         ]);
 
@@ -75,38 +71,6 @@ class AdminController extends Controller
         return view('admin.show_admin', compact('admin'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $admin = Admin::find_by_id($id);
-        $roles = Role::all();
-        return view('admin.admin_edit', compact('admin', 'roles'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $admin = Admin::update($id, $request->all());
-        return redirect('/data-admin');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id) {
         $deleted = Admin::destroy($id);
         return redirect('/data-admin');
