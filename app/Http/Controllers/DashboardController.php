@@ -27,7 +27,6 @@ class DashboardController extends Controller
                     ->whereHas('roles', function($q) {
                         $q->where('name', '!=', 'ROLE_ADMIN');  // Ini hardcoded
                     })
-                    ->get()
                     ->count();
                 $dates[] = $date;
                 $count_customers[] = $count;
