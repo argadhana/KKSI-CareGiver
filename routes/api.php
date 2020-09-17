@@ -26,11 +26,10 @@ Route::get('/loadtransaksi/{id}', 'TransaksiController@loadTransaksi');
 
 Route::group(['prefix' => 'status'], function () {
     Route::get('{id}/menunggu', 'TransaksiController@statusMenunggu');
-    Route::get('{id}/dikonfimasi', 'TransaksiController@statusDikonfimasi');
+    Route::get('{id}/dikonfirmasi', 'TransaksiController@statusDikonfirmasi');
     Route::get('{id}/belum', 'TransaksiController@statusBelum');
     Route::get('{id}/merawat', 'TransaksiController@statusMerawat');
-    Route::get('{id}/ditolak', 'TransaksiController@statusDitolak');
-    Route::get('{id}/diterima', 'TransaksiController@statusDiterima');
+    Route::get('{id}/selesai', 'TransaksiController@statusSelesai');
 });
 
 Route::post('login', 'API\UserController@login');

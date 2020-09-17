@@ -8,7 +8,7 @@ use DataTables;
 
 class MasterController extends Controller
 {
-    public function anjay()
+    public function lansia()
     {
         return view('master.data_lansia');
     }

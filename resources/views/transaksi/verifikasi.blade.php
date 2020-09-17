@@ -72,6 +72,9 @@
       </div>
       <form id="formverifikasi" method="POST">
       <div class="modal-body">
+          <div class="text-center">
+            <img src="" class="rounded" id="fotobuktimodal" alt="..." style="max-width:425px;">
+          </div>
           apakah anda yakin mengganti status <strong>transaksi(id  <span id="idtrans"></span>)</strong> dengan :
           <div class="form-group mt-3">
               <select class="form-control" id="status" name="status">
@@ -118,6 +121,12 @@
 @section('script')
 <script>
   $(function () {
+
+    // $("#buktifotomodal").on( 'click', {
+    //   var win = window.open(url, '_blank');
+    //   win.focus();
+    // }); 
+
     $('.toast').toast({delay:5000})
 
     var table = $('#tableVerifikasi').DataTable({
@@ -136,13 +145,13 @@
       {data: 'nomor_telp', name: 'transaksis.nomor_telp' },
       {data: 'deskripsi_kerja', name: 'deskripsi_kerja' },
       {data: 'total_bayar', name: 'total_bayar' },
-      {data: 'name', name: 'name.users' },
+      {data: 'user_name', name: 'user_name' },
       {data: 'nama', name: 'nama.lansias' },
       {data: 'esccort_name', name: 'esccort_name' },
       {data: 'status', name: 'status' },
       ],
       order: [ 1, "desc" ],
-      rowId: 'id'
+      rowId: 'idtrans'
     });
 
     var id;
@@ -150,20 +159,23 @@
     $('#tableVerifikasi tbody').on( 'click', 'tr', function () {
         var id = table.row( this ).id();
         console.log('anjay');
-        $('#idtrans').text(id);
-        $('#idtransaksi').val(id);
-        $('#confirmStatus').modal('show');
-        // $.ajax({
-        //     url:"role/edit/"+id,
-        //     dataType:"json",
-        //     success:function(html){
-        //     $('.namauser').text(html.data[0].name);
-        //     $('.roleawal').text(html.data[0].role_now);
-        //     $('.rolesudah').text(html.data[0].role_requested);
-        //     $('#editRoleModal').modal('show')
-        //     // alert( 'ini adalah '+html.data[0].name );
-        //     }
-        // })
+        $.ajax({
+            url:"/api/loadtransaksi/"+id,
+            dataType:"json",
+            success:function(html){
+            // $('.namauser').text(html.data[0].name);
+            $('#idtrans').text(id);
+            $('#idtransaksi').val(id);
+            $('#fotobuktimodal').attr('src','');
+            if (!html.success[0].bukti_foto) {
+              $('#fotobuktimodal').attr('src','https://www.iconfinder.com/data/icons/modifiers-add-on-1/48/v-17-512.png'); 
+            } else {
+              $('#fotobuktimodal').attr('src','../buktiPhotos/'+html.success[0].bukti_foto);
+            }
+            $('#confirmStatus').modal('show');
+            // alert( 'ini adalah '+html.success[0].bukti_foto );
+            }
+        })
     } );
 
     $('#formverifikasi').submit(function(e) {

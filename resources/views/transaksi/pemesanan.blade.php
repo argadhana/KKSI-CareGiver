@@ -223,7 +223,7 @@
       {data: 'nomor_telp', name: 'transaksis.nomor_telp' },
       {data: 'deskripsi_kerja', name: 'deskripsi_kerja' },
       {data: 'total_bayar', name: 'total_bayar' },
-      {data: 'name', name: 'name.users' },
+      {data: 'user_name', name: 'user_name' },
       {data: 'nama', name: 'nama.lansias' },
       {data: 'esccort_name', name: 'esccort_name' },
       {data: 'status', name: 'status' },

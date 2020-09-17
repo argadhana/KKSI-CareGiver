@@ -7,6 +7,7 @@ use App\Transaksi;
 use App\User;
 use App\Esccort;
 use App\Lansia;
+use Carbon\Carbon;
 use DataTables;
 
 
@@ -28,7 +29,7 @@ class TransaksiController extends Controller
             ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
             ->join('users', 'transaksis.user_id', '=', 'users.id')
             ->join('lansias', 'transaksis.lansia_id', '=', 'lansias.id')
-            ->select('esccorts.name AS esccort_name','transaksis.id AS idtrans','transaksis.*','users.*','lansias.*','esccorts.*');
+            ->select('esccorts.name AS esccort_name','users.name AS user_name','transaksis.id AS idtrans','transaksis.*','users.*','lansias.*','esccorts.*');
             return Datatables::of($transaksi)
                 ->make(true);
         }
@@ -40,7 +41,7 @@ class TransaksiController extends Controller
             ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
             ->join('users', 'transaksis.user_id', '=', 'users.id')
             ->join('lansias', 'transaksis.lansia_id', '=', 'lansias.id')
-            ->select('esccorts.name AS esccort_name','transaksis.id AS idtrans','transaksis.*','users.*','lansias.*','esccorts.*')
+            ->select('esccorts.name AS esccort_name','users.name AS user_name','transaksis.id AS idtrans','transaksis.*','users.*','lansias.*','esccorts.*')
             ->whereIn('status',['belum','menunggu','dikonfirmasi','merawat','ditolak','diterima']);
             return Datatables::of($transaksi)
                 ->make(true);
@@ -174,30 +175,35 @@ class TransaksiController extends Controller
         
         return response()->json(['success' => $transaksi], $this->successStatus);
     }
-    public function statusDitolak($id)
+    public function statusSelesai($id)
     {
         $transaksi = Transaksi::where('user_id',$id)
         ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
-        ->where('status','ditolak')
+        ->whereIn('status',['ditolak','diterima'])
         ->select('transaksis.id AS idtrans','esccorts.id AS idesccort','transaksis.*','esccorts.*')
         ->get();
     
         return response()->json(['success' => $transaksi], $this->successStatus);
     }
-    public function statusDiterima($id)
-    {
-        $transaksi = Transaksi::where('user_id',$id)
-        ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
-        ->where('status','diterima')
-        ->select('transaksis.id AS idtrans','esccorts.id AS idesccort','transaksis.*','esccorts.*')
-        ->get();
+    // public function statusDiterima($id)
+    // {
+    //     $transaksi = Transaksi::where('user_id',$id)
+    //     ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
+    //     ->where('status','diterima')
+    //     ->select('transaksis.id AS idtrans','esccorts.id AS idesccort','transaksis.*','esccorts.*')
+    //     ->get();
         
-        return response()->json(['success' => $transaksi], $this->successStatus);
-    }
+    //     return response()->json(['success' => $transaksi], $this->successStatus);
+    // }
     public function uploadBuktiTransaksi(Request $request)
     {
-        // $transaksi = Transaksi::where('id', $request->id)->get();
         $image = $request->file('bukti_foto');
+
+        if (!$image) {
+            return response()->json(['error' => 'kamu belum upload foto']);
+        }
+        else {
+        // $transaksi = Transaksi::where('id', $request->id)->get();
 
         $new_name = 'buktitransaksi' . $request->id . '-' . rand(11111, 99999)  . '.' . $image->getClientOriginalExtension();
 
@@ -210,7 +216,9 @@ class TransaksiController extends Controller
 
         Transaksi::whereId($request->id)->update($transaksi);
 
-        return response()->json(['success' => 'qamu berhasil dech'], $this->successStatus);
+        return response()->json(['success' => 'qamu berhasil dech']);
+        
+        }
     }
     public function loadTransaksi($id)
     {
@@ -224,17 +232,26 @@ class TransaksiController extends Controller
         'transaksis.id AS transaksi_id',
         'esccorts.id AS esccort_id',
         'lansias.id AS lansia_id',
+        'esccorts.gender AS esccort_gender',
+        'lansias.gender AS lansia_gender',
         'transaksis.*',
         'esccorts.*',
-        'lansias.*',
-        'users.*')
+        'lansias.*')
         ->get();
 
         return response()->json(['success' => $transaksidetail]);
     }
     public function updatestatus(Request $request)
-    {
-        Transaksi::whereId($request->id)->update(['status' => $request->status]);
+    {   
+        $t = Transaksi::whereId($request->id);
+        
+        $t->update(['status' => $request->status]);
+
+        if ($request->status = 'diterima') {
+            $now = Carbon::now();   
+            $t->update(['complate_time' => $now]);
+        }
+            
         return response()->json(['success' => 'anjayyy']);
     }
 }
