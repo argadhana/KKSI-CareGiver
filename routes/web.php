@@ -26,6 +26,9 @@ Route::get('/dashboard', 'HomeController@index');
 Route::redirect('/', '/dashboard');
 Route::redirect('/home', '/dashboard');
 
+Route::get('/dashboard/data-chart-user', 'DashboardController@user');
+Route::get('/dashboard/data-chart-pemesanan', 'DashboardController@pemesanan');
+
 Route::get('/data-admin/create', 'AdminController@create'); // menampilkan halaman form
 Route::post('/data-admin', 'AdminController@store'); // menyimpan data
 Route::get('/data-admin', 'AdminController@index'); // menampilkan semua
