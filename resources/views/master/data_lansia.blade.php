@@ -25,8 +25,10 @@
     <div class="col-12">
       
       <!-- /.card -->
-
       <div class="card">
+        <button id="buttona" type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahlansia">
+          Tambah Lansia
+        </button>
         <!-- /.card-header -->
         <div class="card-body">
           <table id="tableLansia" class="table table-bordered table-hover small" style="text-size:11px; width:100%;">
@@ -63,18 +65,95 @@
   <!-- /.row -->
 </section>
 <!-- /.content -->
+<div class="toast" id="toasthapus" data-delay="10000" style="position: absolute; top: 100px; right: 50px;">
+  <div class="toast-header">
+    <strong class="mr-auto">Notice</strong>
+    {{-- <small>11 mins ago</small> --}}
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    Sukses, Data Berhasil dihapus.
+  </div>
+</div>
+
+<div class="toast" id="toastinput" data-delay="10000" style="position: absolute; top: 100px; right: 50px;">
+  <div class="toast-header">
+    <strong class="mr-auto">Notice</strong>
+    {{-- <small>11 mins ago</small> --}}
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    Sukses, Data Berhasil Dibuat.
+  </div>
+</div>
+
+<div class="modal fade" id="tambahlansia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+    <form id="formtambahlansia" method="POST">
+          @csrf
+      <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">Lansia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Nama Lansia:</label>
+            <input type="text" class="form-control forminput forminputlansia" id="lnama" name="nama">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Umur:</label>
+            <input type="number" class="form-control forminput forminputlansia" id="lumur" name="umur">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Gender:</label>
+            <select class="form-control" name="umur" id="lumur">
+              <option value="L" >Laki Laki</option>
+              <option value="P" >Perempuan</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Hobi:</label>
+            <input type="text" class="form-control forminput forminputlansia" id="lhobi" name="hobi">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Riwayat Penyakit:</label>
+            <textarea class="form-control" id="lriwayat" rows="3" name="riwayat"></textarea>
+          </div>
+          
+          <input id="idlansia" name="lansia_id" type="hidden" value="">
+          <input id="iduser" name="user_id" type="hidden" value="{{auth()->user()->id}}">
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+          <button type="submit" id="submitform" class="btn btn-primary">Simpan</button>
+      </div>
+    </form>
+      </div>
+</div>
+</div>
 
 @endsection
 @section('script')
 <script>
-  $(function () {
-    $('#tableLansia').DataTable({
+  
+  function datatableslansia() {
+    table = $('#tableLansia').DataTable({
       scrollX: true,
       autoWidth: false,
       selection: true,
       processing: true,
       serverSide: true,
       ajax: {url: '/lansia/get'},
+      columnDefs: [
+        {width: '15px', targets: 6 }
+        ],
       columns: [
       {data: 'id', name: 'id' },
       {data: 'nama', name: 'nama' },
@@ -82,13 +161,97 @@
       {data: 'gender', name: 'name'},
       {data: 'hobi', name: 'name' },
       {data: 'riwayat', name: 'name' },
-      {data: 'nama', name: 'nama' },
+      {data: 'aksi', name: 'aksi', orderable: 'false'},
       ],
+      rowId: 'id'
     });
+  }
 
-    $(window).bind('resize', function () {
-    oTable.fnAdjustColumnSizing();
+  function buttonsimpan() {
+    $('#formtambahlansia').submit(function(e) {
+      e.preventDefault();
+      // console.log(id);
+      if ($('#idlansia').val() !== '') {
+        $.ajax({
+        url:"/updatelansia",
+        method:"POST",
+        data: new FormData(this),
+        contentType: false,
+        cache:false,
+        processData: false,
+        dataType:"json",
+          success:function(html){
+            $('#toastinput').toast('show')
+            table.ajax.reload();
+            $('#formtambahlansia')[0].reset();
+            $('#tambahlansia').modal('hide');
+          }
+        })
+      } else {
+        $.ajax({
+        url:"/simpanlansia",
+        method:"POST",
+        data: new FormData(this),
+        contentType: false,
+        cache:false,
+        processData: false,
+        dataType:"json",
+          success:function(html){
+            $('#toastinput').toast('show')
+            table.ajax.reload();
+            $('#formtambahlansia')[0].reset();
+            $('#tambahlansia').modal('hide');
+
+          // $('#toastberhasil').toast('show')
+          // $('#confirmStatus').modal('hide');
+          // alert(html.success);
+          // table.ajax.reload();
+          }
+        })
+      }
+    } );
+  }
+
+  function buttonedit() {
+    $('#tableLansia tbody').on( 'click', 'tr', function () {
+        var id = table.row( this ).id();
+        $.ajax({
+            url:"/loadlansia/"+id,
+            dataType:"json",
+            success:function(html){
+              $('#formtambahlansia')[0].reset();
+              $('#lnama').val(html.success.nama);
+              $('#lumur').val(html.success.umur);
+              $('#lgender').val(html.success.gender);
+              $('#lhobi').val(html.success.hobi);
+              $('#lriwayat').text(html.success.riwayat);
+              $('#idlansia').val(html.success.id);
+              $('#tambahlansia').modal('show');
+            }
+        })
+    } );
+  }
+
+  function buttonhapus() {
+    $('#tableLansia tbody').on( 'click', 'button', function () {
+      var id = $(this).attr('data-idlansia');
+      $.ajax({
+            url:"/lansia/delete/"+ id,
+            dataType:"json",
+            success:function(html){
+              $('#toasthapus').toast('show')
+              table.ajax.reload();
+            }
+        })
     });
+  }
+
+  $(function () {
+
+    datatableslansia()
+    buttonhapus()
+    buttonedit()
+    buttonsimpan()
   });
 </script>
 @endsection

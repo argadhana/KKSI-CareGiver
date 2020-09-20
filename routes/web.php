@@ -40,6 +40,12 @@ Route::get('/data-customer/{id}', 'CustomerController@show'); // menampilkan det
 
 Route::resource('data-role', 'RoleController');
 
+Route::get('/lansia/delete/{id}', 'MasterController@del');
+Route::post('/simpanlansia', 'MasterController@simpan');
+Route::get('/loadlansia/{id}', 'MasterController@loadlansia');
+Route::post('/updatelansia', 'MasterController@updatelansia');
+
+
 Route::get('/data-esccort/create', 'EsccortController@create');
 Route::post('/data-esccort/store', 'EsccortController@store');
 Route::get('/data-esccort', 'EsccortController@index');

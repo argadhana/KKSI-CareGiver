@@ -20,6 +20,8 @@ class CreateLansiasTable extends Migration
             $table->string('gender')->nullable();
             $table->text('hobi')->nullable();
             $table->text('riwayat')->nullable();
+            $table->text('rating')->nullable();
+            $table->softDeletes();
         });
     }
 

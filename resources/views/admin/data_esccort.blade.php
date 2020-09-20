@@ -2,8 +2,8 @@
 {{-- @section('title', 'Dashboard') --}}
 @section('content')
 <div class="ml-3 mt-3">
-    <h1>Data Esccort</h1>
-    <a href="/data-esccort/create" class="btn btn-primary mb-2">Tambah Data Esccort</a>
+    <h1>Data CG</h1>
+    <a href="/data-esccort/create" class="btn btn-primary mb-2">Tambah Data CG</a>
   <table class="table table-bordered">
     <thead>
       <tr>

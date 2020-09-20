@@ -114,7 +114,7 @@
     </button>
   </div>
   <div class="toast-body">
-    Berhasil, Men-update Data.
+    Sukses, Data Berhasil Diupdate.
   </div>
 </div>
 @endsection
@@ -158,7 +158,6 @@
 
     $('#tableVerifikasi tbody').on( 'click', 'tr', function () {
         var id = table.row( this ).id();
-        console.log('anjay');
         $.ajax({
             url:"/api/loadtransaksi/"+id,
             dataType:"json",

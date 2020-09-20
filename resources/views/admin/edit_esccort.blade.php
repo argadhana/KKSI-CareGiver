@@ -4,7 +4,7 @@
 <div class="ml-3 mt-3">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Edit Esccort</h3>
+        <h3 class="card-title">Edit CG</h3>
       </div>
       <!-- /.card-header -->
       <!-- form start -->

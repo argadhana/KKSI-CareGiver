@@ -142,8 +142,12 @@ class TransaksiController extends Controller
         ->where('status','belum')
         ->select('transaksis.id AS idtrans','esccorts.id AS idesccort','transaksis.*','esccorts.*')
         ->get();
-    
-        return response()->json(['success' => $transaksi], $this->successStatus);
+        
+        if ($transaksi == '[]') {
+            return response()->json(['failed' => 'Data tidak ditemukan'],401);    
+        }else {
+            return response()->json(['success' => $transaksi], $this->successStatus);
+        }
     }
     public function statusMenunggu($id)
     {
@@ -153,17 +157,25 @@ class TransaksiController extends Controller
         ->select('transaksis.id AS idtrans','esccorts.id AS idesccort','transaksis.*','esccorts.*')
         ->get();
     
-        return response()->json(['success' => $transaksi], $this->successStatus);
+        if ($transaksi == '[]') {
+            return response()->json(['failed' => 'Data tidak ditemukan'],401);    
+        }else {
+            return response()->json(['success' => $transaksi], $this->successStatus);
+        }
     }
     public function statusDikonfirmasi($id)
     {
         $transaksi = Transaksi::where('user_id',$id)
         ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
-        ->where('status','dikonfimasi')
+        ->where('status','dikonfirmasi')
         ->select('transaksis.id AS idtrans','esccorts.id AS idesccort','transaksis.*','esccorts.*')
         ->get();
     
-        return response()->json(['success' => $transaksi], $this->successStatus);
+        if ($transaksi == '[]') {
+            return response()->json(['failed' => 'Data tidak ditemukan'],401);    
+        }else {
+            return response()->json(['success' => $transaksi], $this->successStatus);
+        }
     }
     public function statusMerawat($id)
     {
@@ -173,7 +185,11 @@ class TransaksiController extends Controller
         ->select('transaksis.id AS idtrans','esccorts.id AS idesccort','transaksis.*','esccorts.*')
         ->get();
         
-        return response()->json(['success' => $transaksi], $this->successStatus);
+        if ($transaksi == '[]') {
+            return response()->json(['failed' => 'Data tidak ditemukan'],401);    
+        }else {
+            return response()->json(['success' => $transaksi], $this->successStatus);
+        }
     }
     public function statusSelesai($id)
     {
@@ -183,7 +199,11 @@ class TransaksiController extends Controller
         ->select('transaksis.id AS idtrans','esccorts.id AS idesccort','transaksis.*','esccorts.*')
         ->get();
     
-        return response()->json(['success' => $transaksi], $this->successStatus);
+        if ($transaksi == '[]') {
+            return response()->json(['failed' => 'Data tidak ditemukan'],401);    
+        }else {
+            return response()->json(['success' => $transaksi], $this->successStatus);
+        }
     }
     // public function statusDiterima($id)
     // {
@@ -216,7 +236,7 @@ class TransaksiController extends Controller
 
         Transaksi::whereId($request->id)->update($transaksi);
 
-        return response()->json(['success' => 'qamu berhasil dech']);
+        return response()->json(['success' => 'Foto Berhasil Diupload']);
         
         }
     }
@@ -252,6 +272,6 @@ class TransaksiController extends Controller
             $t->update(['complate_time' => $now]);
         }
             
-        return response()->json(['success' => 'anjayyy']);
+        return response()->json(['success' => 'Data Berhasil Diupdate']);
     }
 }

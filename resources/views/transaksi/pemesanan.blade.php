@@ -27,9 +27,9 @@
       <!-- /.card -->
 
       <div class="card">
-        <button id="buttona" type="button" class="btn btn-primary">
-          tambah transaksi
-        </button>
+        {{-- <button id="buttona" type="button" class="btn btn-primary">
+          Tambah Transaksi Dari Admin
+        </button> --}}
         <!-- /.card-header -->
         <div class="card-body">
           <table id="tableTransaksi" class="table table-bordered small" style="text-size:11px; width:100%;">
@@ -126,10 +126,6 @@
             <label for="recipient-name" class="col-form-label">deskripsi:</label>
             <input type="text" class="form-control forminput" id="recipient-name" name="deskripsi_kerja">
           </div>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">harga:</label>
-            <input type="text" class="form-control forminput" id="recipient-name" name="bayar">
-          </div>
           <input id="idlansia" name="lansia_id" type="hidden" value="">
           <input id="idesccort" name="esccort_id" type="hidden" value="1">
           <input id="iduser" name="user_id" type="hidden" value="{{auth()->user()->id}}">
@@ -202,7 +198,6 @@
         dataType:"json",
           success:function(html){
             
-          alert( 'ini bisa');
           }
       })
   } );
