@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Lansia;
 use DataTables;
 use DB;
+use Validator;
+use Illuminate\Validation\Rule;
 
 class MasterController extends Controller
 {
@@ -52,6 +54,17 @@ class MasterController extends Controller
     }
     public function simpan(Request $request)
     {
+        $rules = array(
+            'nama'=>'required|unique:lansias',
+            'umur'   =>  'required',
+            'hobi'   =>  'required',
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if ($error->fails()) {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
 
         $form_data = array(
             'nama'=>$request->nama,
@@ -64,6 +77,7 @@ class MasterController extends Controller
         Lansia::create($form_data);
 
         return response()->json(['success' => 'Data berhasil dibuat']);
+
     }
     public function loadlansia($id)
     {
@@ -72,6 +86,21 @@ class MasterController extends Controller
     }
     public function updatelansia(Request $request)
     {
+        $rules = array(
+            'nama' =>  [
+                'required',
+                    Rule::unique('lansias')->ignore($request->hidden_id),
+            ],
+            'umur'   =>  'required',
+            'hobi'   =>  'required',
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
 
         $form_data = array(
             'nama'=>$request->nama,
@@ -81,7 +110,7 @@ class MasterController extends Controller
             'riwayat'=>$request->riwayat,
         );
 
-        Lansia::whereId($request->idlansia)->update($form_data);
+        Lansia::whereId($request->hidden_id)->update($form_data);
 
         return response()->json(['success' => 'Data berhasil diupdate']);
     }

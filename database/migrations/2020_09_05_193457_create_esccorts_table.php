@@ -23,6 +23,7 @@ class CreateEsccortsTable extends Migration
             $table->string('gender');
             $table->string('phone');
             $table->string('photo');
+            $table->string('rating');
         });
     }
 
