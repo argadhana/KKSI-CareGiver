@@ -32,6 +32,8 @@ Route::group(['prefix' => 'status'], function () {
     Route::get('{id}/selesai', 'TransaksiController@statusSelesai');
 });
 
+Route::get('/getdetailcg/{id}','API\EsccortController@getcg');
+
 Route::post('/cg/filter', 'MasterController@filtercg');
 
 Route::post('login', 'API\UserController@login');

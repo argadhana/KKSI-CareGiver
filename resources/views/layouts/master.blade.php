@@ -106,7 +106,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/data-esccort" class="nav-link">
+                <a href="/cg" class="nav-link">
                   <i class="nav-icon fas fa-caret-right"></i>
                   <p>Data CG</p>
                 </a>

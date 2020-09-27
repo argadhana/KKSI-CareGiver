@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Esccort;
+use App\Transaksi;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EsccortCollection;
 use App\Http\Resources\EsccortItem;
@@ -17,9 +18,35 @@ class EsccortController extends Controller
      */
     public function index()
     {
-        return new EsccortCollection(Esccort::get());
-    }
+        $esccort = new Esccort;
 
+        $esccortsudah = $esccort->join('transaksis', 'transaksis.esccort_id', '=', 'esccorts.id')
+                                ->select('esccorts.id AS id')
+                                ->whereIn('status',['menunggu','dikonfirmasi','merawat'])
+                                ->pluck('id');
+        $esccortbelum = $esccort->get();
+
+        $es = $esccortsudah;
+        $eb = new EsccortCollection($esccortbelum);
+        // $cgall = ['dalam_proses' => $es,
+        //           'tidak_dalam_proses' => $eb];
+        return response()->json(['data' => $eb,
+                                 'dalam_proses' => $es]);
+    }
+    public function getcg($id)
+    {
+        $escort = Transaksi::where('esccort_id',$id)
+        ->whereIn('status',['menunggu','dikonfirmasi','merawat'])
+        ->select('esccort_id AS id','status')
+        ->get();
+        
+        if ($escort == []) {
+            return response()->json(['failed' => 'Data tidak ditemukan'],401);
+        }else {
+            return response()->json(['success' => $escort]);
+        }
+        
+    }
     /**
      * Show the form for creating a new resource.
      *

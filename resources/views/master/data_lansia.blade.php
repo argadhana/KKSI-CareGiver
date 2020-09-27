@@ -176,76 +176,6 @@
     });
   }
 
-function allk() {
-
-  
-}
-
-  // function buttonsimpan() {
-  //   $('#formtambahlansia').submit(function(e) {
-  //     e.preventDefault();
-  //     // console.log(id);
-  //     if ($('#idlansia').val() !== '') {
-  //       $.ajax({
-  //       url:"/updatelansia",
-  //       method:"POST",
-  //       data: new FormData(this),
-  //       contentType: false,
-  //       cache:false,
-  //       processData: false,
-  //       dataType:"json",
-  //         success:function(html){
-  //           $('#toastinput').toast('show')
-  //           table.ajax.reload();
-  //           $('#formtambahlansia')[0].reset();
-  //           $('#tambahlansia').modal('hide');
-  //         }
-  //       })
-  //     } else {
-  //       $.ajax({
-  //       url:"/simpanlansia",
-  //       method:"POST",
-  //       data: new FormData(this),
-  //       contentType: false,
-  //       cache:false,
-  //       processData: false,
-  //       dataType:"json",
-  //         success:function(html){
-  //           $('#toastinput').toast('show')
-  //           table.ajax.reload();
-  //           $('#formtambahlansia')[0].reset();
-  //           $('#tambahlansia').modal('hide');
-
-  //         // $('#toastberhasil').toast('show')
-  //         // $('#confirmStatus').modal('hide');
-  //         // alert(html.success);
-  //         // table.ajax.reload();
-  //         }
-  //       })
-  //     }
-  //   } );
-  // }
-
-  // function buttonedit() {
-  //   $('#tableLansia tbody').on( 'click', 'tr', function () {
-  //       var id = table.row( this ).id();
-  //       $.ajax({
-  //           url:"/loadlansia/"+id,
-  //           dataType:"json",
-  //           success:function(html){
-  //             $('#formtambahlansia')[0].reset();
-  //             $('#lnama').val(html.success.nama);
-  //             $('#lumur').val(html.success.umur);
-  //             $('#lgender').val(html.success.gender);
-  //             $('#lhobi').val(html.success.hobi);
-  //             $('#lriwayat').text(html.success.riwayat);
-  //             $('#idlansia').val(html.success.id);
-  //             $('#tambahlansia').modal('show');
-  //           }
-  //       })
-  //   } );
-  // }
-
   function buttonhapus() {
     $('#tableLansia tbody').on( 'click', 'button', function () {
       var id = $(this).attr('data-idlansia');
@@ -264,7 +194,7 @@ function allk() {
 
     datatableslansia()
     buttonhapus()
-    // all()
+    
     $('#buttoncreatelansia').on( 'click',function () {
     $('#formlansia')[0].reset();
     $('#lriwayat').text("");
@@ -272,13 +202,10 @@ function allk() {
     $('#action').val("Add");
     $('#modallansia').modal('show');
     });
-    // buttonedit()
-    // buttonsimpan()
-
     $('#tableLansia tbody').on( 'click', 'tr', function () {
       var id = table.row( this ).id();
       $.ajax({
-          url:"/loadlansia/"+id,
+          url:"/lansia/load/"+id,
           dataType:"json",
           success:function(html){
             $('#formlansia')[0].reset();
@@ -301,7 +228,7 @@ function allk() {
   if($('#action').val() == 'Add')
   {
   $.ajax({
-      url:"/simpanlansia",
+      url:"/lansia/simpan",
       method:"POST",
       data: new FormData(this),
       contentType: false,
@@ -336,7 +263,7 @@ function allk() {
   if($('#action').val() == "Edit")
   {
    $.ajax({
-    url:"/updatelansia",
+    url:"/lansia/update",
     method:"POST",
     data:new FormData(this),
     contentType: false,

@@ -40,12 +40,6 @@ Route::get('/data-customer/{id}', 'CustomerController@show'); // menampilkan det
 
 Route::resource('data-role', 'RoleController');
 
-Route::get('/lansia/delete/{id}', 'MasterController@del');
-Route::post('/simpanlansia', 'MasterController@simpan');
-Route::get('/loadlansia/{id}', 'MasterController@loadlansia');
-Route::post('/updatelansia', 'MasterController@updatelansia');
-
-
 Route::get('/data-esccort/create', 'EsccortController@create');
 Route::post('/data-esccort/store', 'EsccortController@store');
 Route::get('/data-esccort', 'EsccortController@index');
@@ -61,14 +55,23 @@ Route::group(['prefix' => 'customer'], function () {
     Route::get('/get', 'CustomerController@getDataCustomer');
 });
 
-Route::group(['prefix' => 'api'], function () {
-
-});
-
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'lansia'], function () {
         Route::get('/', 'MasterController@lansia');
         Route::get('/get', 'MasterController@getDataLansia');
+        Route::get('/delete/{id}', 'MasterController@del');
+        Route::post('/simpan', 'MasterController@simpan');
+        Route::get('/load/{id}', 'MasterController@loadlansia');
+        Route::post('/update', 'MasterController@updatelansia');
+    });
+
+    Route::group(['prefix' => 'cg'], function () {
+        Route::get('/', 'EsccortController@index');
+        Route::get('/get', 'MasterController@getDataEsccort');
+        Route::get('/delete/{id}', 'EsccortController@destroy');
+        Route::post('/simpan', 'EsccortController@store');
+        Route::get('/load/{id}', 'EsccortController@edit');
+        Route::post('/update', 'EsccortController@update');
     });
 
     Route::group(['prefix' => 'transaksi'], function () {

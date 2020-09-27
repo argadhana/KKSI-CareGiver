@@ -274,4 +274,5 @@ class TransaksiController extends Controller
             
         return response()->json(['success' => 'Data Berhasil Diupdate']);
     }
+
 }

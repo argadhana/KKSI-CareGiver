@@ -27,9 +27,9 @@
       <!-- /.card -->
 
       <div class="card">
-        {{-- <button id="buttona" type="button" class="btn btn-primary">
+        <button id="buttona" type="button" class="btn btn-primary">
           Tambah Transaksi Dari Admin
-        </button> --}}
+        </button>
         <!-- /.card-header -->
         <div class="card-body">
           <table id="tableTransaksi" class="table table-bordered small" style="text-size:11px; width:100%;">

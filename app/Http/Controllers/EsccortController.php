@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Esccort;
 use App\Models\EsccortModel;
+use Validator;
+use Illuminate\Validation\Rule;
+
 class EsccortController extends Controller
 {
     public function __construct()
@@ -12,22 +15,13 @@ class EsccortController extends Controller
         $this->middleware('auth');
         $this->middleware('role:ROLE_ADMIN');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $esccort = Esccort::all();
-        return view ('admin.data_esccort', compact('esccort'));
+        // $esccort = Esccort::all();
+        return view ('master.data_cg');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
@@ -35,15 +29,24 @@ class EsccortController extends Controller
         return view ('admin.form_esccort', compact('esccort'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
+        $rules = array(
+            'name'=>'required|unique:esccorts',
+            'keahlian'   =>  'required',
+            'age'   =>  'required',
+            'address'   =>  'required',
+            'photo'   =>  'required|image',
+            'phone'   =>  'required',
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if ($error->fails()) {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
         $image = $request->file('photo');
 
         $new_name = 'esccort' . rand(11111, 99999)  . '.' . $image->getClientOriginalExtension();
@@ -63,15 +66,9 @@ class EsccortController extends Controller
 
         Esccort::create($new_esccort);
 
-        return redirect('/data-esccort');
-}
+        return response()->json(['success' => 'Data berhasil dibuat']);
+    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
 
@@ -80,42 +77,88 @@ class EsccortController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
-        $esccort = EsccortModel::find_by_id($id);
-        return view ('admin.edit_esccort', compact('esccort'));
+        $esccort = Esccort::findOrFail($id);
+        return response()->json(['success' => $esccort]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
-        $esccort = Esccort::update($id, $request->all());
-        return redirect('/data-esccort');
+        if (!$request->photo) {
+            $rules = array(
+                'name' => [Rule::unique('esccorts', 'id')->where(function ($query) use ($request) {
+                    return $query->where('id','=', $request->hidden_id);
+                }),],
+                'keahlian'   =>  'required',
+                'age'   =>  'required',
+                'address'   =>  'required',
+                'phone'   =>  'required'
+            );
+
+            $error = Validator::make($request->all(), $rules);
+
+            if ($error->fails()) {
+                return response()->json(['errors' => $error->errors()->all()]);
+            }
+
+            $new_esccort = array(
+                'salary' => $request['salary'],
+                'keahlian' => $request['keahlian'],
+                'name' => $request['name'],
+                'age' => $request['age'],
+                'address' => $request['address'],
+                'gender' => $request['gender'],
+                'phone' => $request['phone']
+            );
+        }else {
+            $rules = array(
+                'name' => [Rule::unique('esccorts', 'id')->where(function ($query) use ($request) {
+                    return $query->where('id','=', $request->hidden_id);
+                }),],
+                'keahlian'   =>  'required',
+                'age'   =>  'required',
+                'address'   =>  'required',
+                'photo'   =>  'required|image',
+                'phone'   =>  'required',
+            );
+
+            $error = Validator::make($request->all(), $rules);
+
+            if ($error->fails()) {
+                return response()->json(['errors' => $error->errors()->all()]);
+            }
+
+            $image = $request->file('photo');
+    
+            $new_name = 'esccort' . rand(11111, 99999)  . '.' . $image->getClientOriginalExtension();
+    
+            $image->move(public_path('esccortPhotos'), $new_name);
+
+            $new_esccort = array(
+                'salary' => $request['salary'],
+                'keahlian' => $request['keahlian'],
+                'name' => $request['name'],
+                'age' => $request['age'],
+                'address' => $request['address'],
+                'gender' => $request['gender'],
+                'phone' => $request['phone'],
+                'photo' => $new_name
+            );
+        }
+
+        Esccort::whereId($request->hidden_id)->update($new_esccort);
+
+        return response()->json(['success' => 'Data berhasil disimpan']);
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id) {
-        $deleted = EsccortModel::destroy($id);
-        return redirect('/data-esccort');
+        $note=Esccort::findOrFail($id);
+        $note->delete();
+
+        return response()->json(['success' => 'Data Berhasil Dihapus.']);
     }
 }
