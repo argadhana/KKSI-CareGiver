@@ -30,6 +30,9 @@
 			<div class="wrap-login100 p-t-190 p-b-30">
 				<form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
 					@csrf
+					<div class="login100-form-avatar">
+						<img src="{{ asset('/logo2.webp')}}" alt="logo">
+					</div>
 
 					<span class="login100-form-title p-t-20 p-b-45">
 						Admin Login

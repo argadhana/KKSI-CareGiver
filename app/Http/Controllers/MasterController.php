@@ -53,7 +53,7 @@ class MasterController extends Controller
     {
         $lansia = DB::table('esccorts');
         if (!$request->age1 && !$request->age2) {
-            $lansia->where('gender',$request->gender);
+            $lansia->where('gender',$request->gender)->whereNull('deleted_at');
         }elseif (!$request->age2) {
             $lansia->where('age',$request->age1);
         }elseif (!$request->gender) {

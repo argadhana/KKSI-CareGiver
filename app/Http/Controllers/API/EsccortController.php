@@ -40,7 +40,7 @@ class EsccortController extends Controller
         ->select('esccort_id AS id','status')
         ->get();
         
-        if ($escort == []) {
+        if ($escort == '[]') {
             return response()->json(['failed' => 'Data tidak ditemukan'],401);
         }else {
             return response()->json(['success' => $escort]);

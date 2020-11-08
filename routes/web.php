@@ -40,13 +40,13 @@ Route::get('/data-customer/{id}', 'CustomerController@show'); // menampilkan det
 
 Route::resource('data-role', 'RoleController');
 
-Route::get('/data-esccort/create', 'EsccortController@create');
-Route::post('/data-esccort/store', 'EsccortController@store');
-Route::get('/data-esccort', 'EsccortController@index');
-Route::get('/data-esccort/{id}', 'EsccortController@show');
-Route::get('/data-esccort/{id}/edit', 'EsccortController@edit');
-Route::put('/data-esccort/{id}', 'EsccortController@update');
-Route::delete('/data-esccort/{id}', 'EsccortController@destroy');
+// Route::get('/data-esccort/create', 'EsccortController@create');
+// Route::post('/data-esccort/store', 'EsccortController@store');
+// Route::get('/data-esccort', 'EsccortController@index');
+// Route::get('/data-esccort/{id}', 'EsccortController@show');
+// Route::get('/data-esccort/{id}/edit', 'EsccortController@edit');
+// Route::put('/data-esccort/{id}', 'EsccortController@update');
+// Route::delete('/data-esccort/{id}', 'EsccortController@destroy');
 
 Route::post('updatestatus', 'TransaksiController@updatestatus');
 

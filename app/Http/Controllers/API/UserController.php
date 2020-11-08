@@ -51,7 +51,7 @@ class UserController extends Controller
         $success['gender'] = $user->gender;
         $success['phone'] = $user->phone;
 
-        return response()->json(['success' => $success], $this->successStatus);
+        return response()->json(['success' => $success],$this->successStatus);
     }
 
     public function details()

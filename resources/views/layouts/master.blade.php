@@ -57,9 +57,9 @@
   <aside class="main-sidebar elevation-4 sidebar-dark-primary";>
     <!-- Brand Logo -->
     <a href="/dashboard" class="brand-link">
-        <img src="{{ asset('/template/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('/logo2.webp')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text black">APLIKASI CG</span>
+        <span class="brand-text black">Go Cares</span>
       </a>
 
     <!-- Sidebar -->
