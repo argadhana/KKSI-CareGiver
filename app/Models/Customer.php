@@ -2,7 +2,7 @@
 namespace App\Models;
 use Illuminate\Support\Facades\DB;
 
-class CustomerModel {
+class Customer {
 
     public static function get_customer()
     {

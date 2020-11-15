@@ -167,9 +167,9 @@
       {data: 'id', name: 'id' },
       {data: 'nama', name: 'nama' },
       {data: 'umur', name: 'umur'},
-      {data: 'gender', name: 'name'},
-      {data: 'hobi', name: 'name' },
-      {data: 'riwayat', name: 'name' },
+      {data: 'gender', name: 'gender'},
+      {data: 'hobi', name: 'hobi' },
+      {data: 'riwayat', name: 'riwayat' },
       {data: 'aksi', name: 'aksi', orderable: 'false'},
       ],
       rowId: 'id'

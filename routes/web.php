@@ -50,10 +50,7 @@ Route::resource('data-role', 'RoleController');
 
 Route::post('updatestatus', 'TransaksiController@updatestatus');
 
-Route::group(['prefix' => 'customer'], function () {
-    Route::get('/', 'CustomerController@index');
-    Route::get('/get', 'CustomerController@getDataCustomer');
-});
+
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'lansia'], function () {
@@ -65,6 +62,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/update', 'MasterController@updatelansia');
     });
 
+    Route::group(['prefix' => 'customer'], function () {
+        Route::get('/', 'CustomerController@index');
+        Route::get('/get', 'CustomerController@getDataCustomer');
+    });
+
+    Route::group(['prefix' => 'role'], function () {
+        Route::get('/', 'MasterController@role');
+        Route::get('/get', 'MasterController@getDataRole');
+    });
+    
     Route::group(['prefix' => 'cg'], function () {
         Route::get('/', 'EsccortController@index');
         Route::get('/get', 'MasterController@getDataEsccort');
@@ -79,5 +86,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/verifikasi', 'TransaksiController@indexverif');
         Route::get('/getpesan', 'TransaksiController@getDataTransaksi');
         Route::get('/getverif', 'TransaksiController@getDataVerif');
+    });
+    
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('/', 'MasterController@admin');
+        Route::get('/get', 'MasterController@getDataAdmin');
+        // Route::get('/delete/{id}', 'EsccortController@destroy');
+        // Route::post('/simpan', 'EsccortController@store');
+        // Route::get('/load/{id}', 'EsccortController@edit');
+        // Route::post('/update', 'EsccortController@update');
     });
 });

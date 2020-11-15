@@ -100,7 +100,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/data-customer" class="nav-link">
+                <a href="/customer" class="nav-link">
                   <i class="nav-icon fas fa-caret-right"></i>
                   <p>Data Customer</p>
                 </a>
@@ -112,13 +112,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/data-admin" class="nav-link">
+                <a href="/admin" class="nav-link">
                   <i class="nav-icon fas fa-caret-right"></i>
                   <p>Data Admin</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/data-role" class="nav-link">
+                <a href="/role" class="nav-link">
                   <i class="nav-icon fas fa-caret-right"></i>
                   <p>Data Role</p>
                 </a>

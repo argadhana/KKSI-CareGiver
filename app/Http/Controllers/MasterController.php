@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Lansia;
 use App\Esccort;
+use App\Role;
 use DataTables;
 use DB;
 use Validator;
+use App\Models\Admin;
 use Illuminate\Validation\Rule;
 
 class MasterController extends Controller
@@ -15,6 +17,27 @@ class MasterController extends Controller
     public function lansia()
     {
         return view('master.data_lansia');
+    }
+    public function admin()
+    {
+        return view('master.data_admin');
+    }
+    public function role()
+    {
+        return view('master.data_role');
+    }
+    public function getDataRole(Request $request)
+    {
+        if ($request->ajax()) {
+            $role = Role::select('*');
+            return Datatables::of($role)
+                ->addColumn('aksi', function ($role) {
+                    return
+                        '<button id="buttondeleterole" data-idrole="'.$role->id.'" class="btn btn-danger mr-1 btnhapusrole"><i class="fas fa-trash"></i></button>';
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+        }
     }
     public function getDataLansia(Request $request)
     {
@@ -24,6 +47,19 @@ class MasterController extends Controller
                 ->addColumn('aksi', function ($lansia) {
                     return
                         '<button id="buttondeletelansia" data-idlansia="'.$lansia->id.'" class="btn btn-danger mr-1 btnhapuslansia"><i class="fas fa-trash"></i></button>';
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+        }
+    }
+    public function getDataAdmin(Request $request)
+    {
+        if ($request->ajax()) {
+            $admin = Admin::get_all();
+            return Datatables::of($admin)
+                ->addColumn('aksi', function ($admin) {
+                    return
+                        '<button id="buttondeleteadmin" data-idadmin="'.$admin->id.'" class="btn btn-danger mr-1 btnhapusadmin"><i class="fas fa-trash"></i></button>';
                 })
                 ->rawColumns(['aksi'])
                 ->make(true);
