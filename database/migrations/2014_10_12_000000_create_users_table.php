@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('gender');
             $table->string('phone');
+            $table->string('notif_token');
+            $table->unsignedBigInteger("esccort_id");
             $table->rememberToken();
             $table->timestamps();
         });

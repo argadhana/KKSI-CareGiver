@@ -244,16 +244,16 @@ class TransaksiController extends Controller
     {
         $transaksidetail = Transaksi::where('transaksis.id',$id)
         ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
-        ->join('users', 'transaksis.user_id', '=', 'users.id')
         ->join('lansias', 'transaksis.lansia_id', '=', 'lansias.id')
+        ->join('users', 'transaksis.user_id', '=', 'users.id')
         ->select('esccorts.name AS esccort_name',
-        'users.name AS user_name',
-        'lansias.nama AS lansia_name',
-        'transaksis.id AS transaksi_id',
-        'esccorts.id AS esccort_id',
-        'lansias.id AS lansia_id',
         'esccorts.gender AS esccort_gender',
         'lansias.gender AS lansia_gender',
+        'transaksis.id AS transaksi_id',
+        'lansias.nama AS lansia_name',
+        'esccorts.id AS esccort_id',
+        'lansias.id AS lansia_id',
+        'users.name AS user_name',
         'transaksis.*',
         'esccorts.*',
         'lansias.*')

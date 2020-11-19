@@ -24,6 +24,7 @@ class CreateEsccortsTable extends Migration
             $table->string('phone');
             $table->string('photo');
             $table->string('rating')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->softDeletes();
         });
     }

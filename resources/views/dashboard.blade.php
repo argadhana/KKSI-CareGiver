@@ -24,6 +24,26 @@
         <!-- /.card-header -->
         <div class="card-body">
           
+          <!-- LINE CHART -->
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">Pendapatan Perhari</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                {{-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> --}}
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <canvas id="lineChart" style="min-height: 250px; height: 250px; width: 100%;"></canvas>
+                {{-- <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> --}}
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
           <!-- BAR CHART -->
           <div class="card card-success">
             <div class="card-header">
@@ -39,26 +59,6 @@
               <div class="chart">
                 <canvas id="barChart" style="min-height: 250px; height: 250px; width: 100%;"></canvas>
                 {{-- <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> --}}
-              </div>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-
-          <!-- LINE CHART -->
-          <div class="card card-info">
-            <div class="card-header">
-              <h3 class="card-title">Line Chart</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                {{-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> --}}
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="chart">
-                <canvas id="lineChart" style="min-height: 250px; height: 250px; width: 100%;"></canvas>
-                {{-- <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> --}}
               </div>
             </div>
             <!-- /.card-body -->
@@ -139,7 +139,7 @@ $.ajax({
   url: "/dashboard/data-chart-pemesanan",
   success: function (data) {
     var labelPemesan = data[0];
-    var dataPemesan = data[1];
+    // var dataPemesan = data[1];
     var dataPendapatan = data[2];
     var lineChart = new Chart(document.getElementById('lineChart').getContext('2d'), {
       type: 'line',
@@ -147,13 +147,13 @@ $.ajax({
         labels: labelPemesan,
         datasets: [
           // Ini jumlah pemesan
-          {
-            label: "Pemesan",
-            data: dataPemesan,
-            backgroundColor: 'rgba(227, 53, 76, 0.2)',
-            borderColor: 'rgba(227, 53, 76, 1)',
-            borderWidth: 1.5
-          },
+          // {
+          //   label: "Pemesan",
+          //   data: dataPemesan,
+          //   backgroundColor: 'rgba(227, 53, 76, 0.2)',
+          //   borderColor: 'rgba(227, 53, 76, 1)',
+          //   borderWidth: 1.5
+          // },
           // Ini jumlah pendapatan
           {
             label: "Pemasukan/pendapatan",

@@ -13,4 +13,9 @@ class Esccort extends Model
     protected $fillable = ['salary', 'keahlian', 'name', 'age', 'address', 'gender','phone','photo'];
     public $timestamps = false;
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 }

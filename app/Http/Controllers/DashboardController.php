@@ -53,7 +53,7 @@ class DashboardController extends Controller
     {
         if ($request->ajax()) {
             // Pengaturan hari
-            $date_start = Carbon::now()->subDays(6)->toDateString();    // 7 hari - 1 hari
+            $date_start = Carbon::now()->subDays(30)->toDateString();    // 7 hari - 1 hari
             $date_end = Carbon::now()->toDateString();
             $period = Carbon::parse($date_start)->daysUntil($date_end);
 
@@ -70,6 +70,7 @@ class DashboardController extends Controller
             foreach ($period as $date) {
                 $date = $date->toDateString();
                 $income = Transaksi::whereDate('order_time', $date)
+                    ->where('status','dikonfirmasi')
                     ->sum('total_bayar');
                 // $dates[] = $date;    // Tidak perlu ini biar gk dobel tanggalnya
                 $incomes[] = $income;

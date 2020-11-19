@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class UserController extends Controller
@@ -56,7 +57,26 @@ class UserController extends Controller
 
     public function details()
     {
-        $user = Auth::user();
+        $id_user = Auth::user()->id;
+        $user = DB::table('users')->join('esccorts','users.id','=','esccorts.user_id')->where('users.id',$id_user)->get();
         return response()->json(['success' => $user], $this->successStatus);
     }
+
+    public function tokenUpdate(Request $request)
+    {
+        
+        $user = User::whereId($request->id);
+        if(!$user->token_notif) {
+            $user->update('token_notif',$request->now_token);
+            $success['token'] =  $user->createToken('nApp')->accessToken;
+            return response()->json(['success' => $success], 204);
+
+        }elseif ($user->token_notif != $request->now_token) {
+            $user->update('token_notif',$request->now_token);
+            $success['token'] =  $user->createToken('nApp')->accessToken;
+            return response()->json(['success' => $success], 200);
+        }
+    }
+
+    
 }

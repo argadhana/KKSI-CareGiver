@@ -153,6 +153,28 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-grip-horizontal"></i>
+              <p>Laporan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-caret-right"></i>
+                  <p>Laporan Transaksi</p>
+                </a>
+              </li>
+              {{-- <li class="nav-item">
+                <a href="#i" class="nav-link">
+                  <i class="nav-icon fas fa-caret-right"></i>
+                  <p>Verifikasi</p>
+                </a>
+              </li> --}}
+            </ul>
+          </li>
           {{-- <li class="nav-item" style="buttom:100px;">
             <a href="/logout" class="nav-link">
               <i class="nav-icon fas fa-power-off"></i>
