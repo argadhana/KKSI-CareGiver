@@ -57,8 +57,7 @@ class UserController extends Controller
 
     public function details()
     {
-        $id_user = Auth::user()->id;
-        $user = DB::table('users')->join('esccorts','users.id','=','esccorts.user_id')->where('users.id',$id_user)->get();
+        $user = Auth::user();
         return response()->json(['success' => $user], $this->successStatus);
     }
 
@@ -78,5 +77,11 @@ class UserController extends Controller
         }
     }
 
+    public function detailesccort(){
+        
+        $id_user = Auth::user()->id;
+        $user = DB::table('users')->join('esccorts','users.id','=','esccorts.user_id')->where('users.id',$id_user)->get();
+        return response()->json(['success' => $user], $this->successStatus);
+    }
     
 }
