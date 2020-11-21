@@ -24,6 +24,7 @@ Route::post('/uploadbukti', 'TransaksiController@uploadBuktiTransaksi');
 Route::get('/loadtransaksi/{id}', 'TransaksiController@loadTransaksi');
 
 Route::post('/uptoken', 'UserController@tokenUpdate');
+Route::post('/getpesancg', 'TransaksiControlle@getPesanCg');
 
 Route::group(['prefix' => 'status'], function () {
     Route::get('{id}/menunggu', 'TransaksiController@statusMenunggu');
