@@ -135,6 +135,31 @@ class TransaksiController extends Controller
         
         return response()->json(['success' => $transaksi]);
     }
+    public function statusall(Request $request)
+    {
+        $transaksi = Transaksi::join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
+        ->join('lansias', 'transaksis.lansia_id', '=', 'lansias.id')
+        ->join('users', 'transaksis.user_id', '=', 'users.id')
+        ->select('esccorts.name AS esccort_name',
+        'esccorts.gender AS esccort_gender',
+        'lansias.gender AS lansia_gender',
+        'transaksis.id AS transaksi_id',
+        'lansias.nama AS lansia_name',
+        'esccorts.id AS esccort_id',
+        'esccorts.user_id AS userid-dupe',
+        'lansias.id AS lansia_id',
+        'users.name AS user_name',
+        'transaksis.*',
+        'esccorts.*',
+        'lansias.*')
+        ->where('transaksis.user_id',$request->iduser)
+        ->get();
+        if ($transaksi == '[]') {
+            return response()->json(['failed' => 'Data tidak ditemukan'],401);    
+        }else {
+            return response()->json(['success' => $transaksi], $this->successStatus);
+        }
+    }
     public function statusBelum($id)
     {
         $transaksi = Transaksi::where('user_id',$id)
@@ -273,6 +298,21 @@ class TransaksiController extends Controller
         }
             
         return response()->json(['success' => 'Data Berhasil Diupdate']);
+    }
+    public function getPesanCg(Request $request)
+    {
+        $t = Transaksi::where('esccort_id',$request->id)
+        ->join('lansias', 'transaksis.lansia_id', '=', 'lansias.id')
+        ->select('transaksis.id AS transaksi_id',
+        'lansias.id AS lansia_id',
+        'transaksis.*',
+        'lansias.*')
+        ->get();
+        if ($t == '[]') {
+            return response()->json('Data Kosong',202);
+        }else {
+            return response()->json($t, 200);
+        }
     }
 
 }

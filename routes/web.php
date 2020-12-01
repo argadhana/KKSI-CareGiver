@@ -48,9 +48,6 @@ Route::resource('data-role', 'RoleController');
 // Route::put('/data-esccort/{id}', 'EsccortController@update');
 // Route::delete('/data-esccort/{id}', 'EsccortController@destroy');
 
-Route::post('updatestatus', 'TransaksiController@updatestatus');
-
-
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'lansia'], function () {

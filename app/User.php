@@ -5,10 +5,13 @@ namespace App;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Nagy\LaravelRating\Traits\Rate\CanRate;
+
 
 class User extends Authenticatable
 {
   use HasApiTokens, Notifiable;
+  use CanRate;
 
   /**
    * The attributes that are mass assignable.
@@ -16,7 +19,7 @@ class User extends Authenticatable
    * @var array
    */
   protected $fillable = [
-    'name', 'email', 'password', 'age', 'address', 'gender', 'phone'
+    'name', 'email', 'password', 'age', 'address', 'gender', 'phone', 'notif_token'
   ];
 
   /**
@@ -76,4 +79,5 @@ class User extends Authenticatable
   {
       return $this->hasOne('App\Esccort');
   }
+
 }

@@ -4,10 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Esccort;
 use App\Transaksi;
+use App\User;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EsccortCollection;
 use App\Http\Resources\EsccortItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EsccortController extends Controller
 {
@@ -16,6 +18,26 @@ class EsccortController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function rate(Request $request)
+    {
+        // $userid = Auth::id();
+        $esccort = Esccort::where('id',$request->escortid)->first();
+        $user = User::where('id',$request->userid)->first();
+        
+        $user->rate($esccort, $request->stars);
+        
+        return response()->json('anjay');
+    }
+    public function getrate(Request $request)
+    {
+        $esccort = Esccort::where('id',$request->escortid)->first();
+        $rating = $esccort->ratingsAvg();
+        if ($rating == "") {
+            return response()->json('belum ada rating',202);
+        }else {
+            return response()->json($rating);
+        }
+    }
     public function index()
     {
         $esccort = new Esccort;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9a29a20cafa6a98e0374faae1a8df50",
+    "content-hash": "0e3c4c3493f8f54412f068687a414a7f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1747,6 +1747,57 @@
                 "psr-3"
             ],
             "time": "2020-07-23T08:41:23+00:00"
+        },
+        {
+            "name": "nagy/laravel-rating",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mohamednagy/Laravel-rating.git",
+                "reference": "0da3736632e45b5032dbfc89df79b8dbfe1fef7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mohamednagy/Laravel-rating/zipball/0da3736632e45b5032dbfc89df79b8dbfe1fef7f",
+                "reference": "0da3736632e45b5032dbfc89df79b8dbfe1fef7f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "7.*",
+                "illuminate/support": "7.*",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Nagy\\LaravelRating\\LaravelRatingServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelRating": "Nagy\\LaravelRating\\LaravelRatingFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nagy\\LaravelRating\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "mohamednagy",
+                    "email": "mohamed.n.haleem@gmail.com"
+                }
+            ],
+            "description": "manage rating column for elqouent models",
+            "time": "2020-03-29T19:24:02+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -5188,6 +5239,7 @@
                 "faker",
                 "fixtures"
             ],
+            "abandoned": true,
             "time": "2019-12-12T13:22:17+00:00"
         },
         {

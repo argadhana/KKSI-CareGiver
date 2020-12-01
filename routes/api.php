@@ -23,8 +23,14 @@ Route::get('/load/{id}', 'TransaksiController@loadid');
 Route::post('/uploadbukti', 'TransaksiController@uploadBuktiTransaksi');
 Route::get('/loadtransaksi/{id}', 'TransaksiController@loadTransaksi');
 
-Route::post('/uptoken', 'UserController@tokenUpdate');
-Route::post('/getpesancg', 'TransaksiControlle@getPesanCg');
+Route::post('updatestatus', 'TransaksiController@updatestatus');
+
+Route::post('rate', 'API\EsccortController@rate');
+Route::post('getrate', 'API\EsccortController@getrate');
+
+Route::post('/uptoken', 'API\UserController@tokenUpdate');
+Route::post('/getpesancg', 'TransaksiController@getPesanCg');
+Route::post('/allstatus', 'TransaksiController@statusall');
 
 Route::group(['prefix' => 'status'], function () {
     Route::get('{id}/menunggu', 'TransaksiController@statusMenunggu');

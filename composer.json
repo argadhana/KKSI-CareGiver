@@ -16,6 +16,7 @@
         "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.2",
+        "nagy/laravel-rating": "^1.4",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

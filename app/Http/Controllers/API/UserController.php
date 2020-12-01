@@ -64,16 +64,16 @@ class UserController extends Controller
     public function tokenUpdate(Request $request)
     {
         
-        $user = User::whereId($request->id);
-        if(!$user->token_notif) {
-            $user->update('token_notif',$request->now_token);
-            $success['token'] =  $user->createToken('nApp')->accessToken;
-            return response()->json(['success' => $success], 204);
-
-        }elseif ($user->token_notif != $request->now_token) {
-            $user->update('token_notif',$request->now_token);
-            $success['token'] =  $user->createToken('nApp')->accessToken;
-            return response()->json(['success' => $success], 200);
+        $user = User::where('id',$request->id)->first();
+        $token = $user->notif_token;
+        // return response()->json($token);
+        if ($token == $request->token) {
+            return response()->json(['success' => 'ok'], 204);
+        }
+        else {
+            $user->update(['notif_token'=> $request->token]);
+            // $success['token'] =  $user->createToken('nApp')->accessToken;
+            return response()->json(['success' => 'berhasil'], 200);
         }
     }
 
