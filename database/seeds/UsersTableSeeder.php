@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@admin.com',
-            'password' => 'bcrypt("password")',
+            'password' => bcrypt("password"),
             'age' => 22,
             'address' => 'Kota Semarang',
             'gender' => 'L',
@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'admin2',
             'email' => 'admin2@admin.com',
-            'password' => 'bcrypt("password")',
+            'password' => bcrypt("password"),
             'age' => 22,
             'address' => 'Semarang',
             'gender' => 'L',
@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'esccort',
             'email' => 'esccort@esccort.com',
-            'password' => 'bcrypt("password")',
+            'password' => bcrypt("password"),
             'age' => 12,
             'address' => 'Kota Semarang',
             'gender' => 'P',
@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'esccort1',
             'email' => 'esccort1@esccort.com',
-            'password' => 'bcrypt("password")',
+            'password' => bcrypt("password"),
             'age' => 42,
             'address' => 'Kota Semarang',
             'gender' => 'P',
@@ -57,7 +57,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'customer',
             'email' => 'customer@customer.com',
-            'password' => 'bcrypt("password")',
+            'password' => bcrypt("password"),
             'age' => 12,
             'address' => 'Kota Semarang',
             'gender' => 'P',
