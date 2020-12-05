@@ -22,7 +22,7 @@ class CreateEsccortsTable extends Migration
             $table->string('address');
             $table->string('gender');
             $table->string('phone');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('rating')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->softDeletes();
