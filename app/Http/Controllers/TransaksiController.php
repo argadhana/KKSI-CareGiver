@@ -9,6 +9,7 @@ use App\Esccort;
 use App\Lansia;
 use Carbon\Carbon;
 use DataTables;
+use Illuminate\Support\Facades\Http;
 
 
 
@@ -291,11 +292,28 @@ class TransaksiController extends Controller
         $t = Transaksi::whereId($request->id);
         
         $t->update(['status' => $request->status]);
+        $now = Carbon::now();  
 
-        if ($request->status = 'diterima') {
-            $now = Carbon::now();   
+        if ($request->status == 'diterima') {
             $t->update(['complate_time' => $now]);
         }
+
+        $idusersss = $t->first('user_id');
+        $token = User::whereId($idusersss->user_id)->first('notif_token');
+
+        $response = Http::withHeaders([
+            'Content-type' => 'application/json',
+            'Authorization' => 'key=AAAAqtW2dgM:APA91bEKhY6de7x3grzt1SrevEvSUymf8KSx6YW-IjCP2FXi8kBgKs57xhMPtgP91k5basNJ3_0ENyNS8SDegL-qWboNKCWyDOLN0apqXo42TgSac_y2Yf21Exv9CDURsjRVZn5faRYp'
+        ])->post('https://fcm.googleapis.com/fcm/send',[
+            "to" => $token->notif_token,
+          "notification" => [
+                "body" => "Status transaksi anda sudah di update menjadi ".$request->status." pada ".$now,
+                "title"=> "Pemberitahuan Transaksi"
+            ]
+        ]);
+
+        // return response()->json($response->body());
+        // return response()->json($token->notif_token);
             
         return response()->json(['success' => 'Data Berhasil Diupdate']);
     }
@@ -314,5 +332,4 @@ class TransaksiController extends Controller
             return response()->json($t, 200);
         }
     }
-
 }

@@ -26,7 +26,7 @@ class EsccortController extends Controller
         
         $user->rate($esccort, $request->stars);
         
-        return response()->json('anjay');
+        return response()->json('Berhasil menambah rating');
     }
     public function getrate(Request $request)
     {

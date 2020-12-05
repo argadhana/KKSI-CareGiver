@@ -181,7 +181,7 @@
       e.preventDefault();
       // console.log(id);
       $.ajax({
-        url:"/updatestatus",
+        url:"/api/updatestatus",
         method:"POST",
         data: new FormData(this),
         contentType: false,

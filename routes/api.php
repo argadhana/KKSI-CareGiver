@@ -23,6 +23,8 @@ Route::get('/load/{id}', 'TransaksiController@loadid');
 Route::post('/uploadbukti', 'TransaksiController@uploadBuktiTransaksi');
 Route::get('/loadtransaksi/{id}', 'TransaksiController@loadTransaksi');
 
+Route::post('/send', 'TransaksiController@notif');
+
 Route::post('updatestatus', 'TransaksiController@updatestatus');
 
 Route::post('rate', 'API\EsccortController@rate');
