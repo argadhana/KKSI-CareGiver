@@ -23,7 +23,7 @@ class TransaksisTableSeeder extends Seeder
             'status' => 'belum',
             'user_id' => 5,
             'esccort_id' => 1,
-            'lanisa_id' => 1,
+            'lansia_id' => 1,
         ]);
     }
 }
