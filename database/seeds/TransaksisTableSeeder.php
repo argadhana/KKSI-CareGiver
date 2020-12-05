@@ -14,7 +14,7 @@ class TransaksisTableSeeder extends Seeder
     {
         DB::table('transaksis')->insert([
             'order_time' => Carbon::now(),
-            'paker' => 'harian',
+            'paket' => 'harian',
             'durasi' => 2,
             'alamat' => 'jalan pandanaran',
             'nomor_telp' => '08964597534',
