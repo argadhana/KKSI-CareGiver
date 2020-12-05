@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('gender');
             $table->string('phone');
             $table->string('notif_token')->nullable();
-            $table->unsignedBigInteger("esccort_id");
+            $table->unsignedBigInteger("esccort_id")->nullable();;
             $table->rememberToken();
             $table->timestamps();
         });

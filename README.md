@@ -19,6 +19,16 @@ Project dari team SMKN 8 Semarang yang dibuat menggunakan Laravel 7 untuk memban
 
     composer install
 
+rename " .env.example " menjadi " .env " , buka file " .env " tadi kalibrasikan dengan database localmu pada bagian
+    DB_DATABASE=
+    DB_USERNAME=
+    DB_PASSWORD=
+jika sudah lalu save.
+
+    php artisan key:generate
+
     php artisan migrate
+
+    php artisan db:seed
 
     php artisan serve
