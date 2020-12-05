@@ -89,29 +89,6 @@ class TransaksiController extends Controller
                 $idlansia = $request->lansia_id;
             } 
         }
-        // if ($request->lansia_id == '') {
-        //     $escort = new Lansia;
-        //     $escort->nama = $request->nama;
-        //     $escort->umur = $request->umur;
-        //     $escort->gender = $request->gender;
-        //     $escort->hobi = $request->hobi;
-        //     $escort->riwayat = $request->riwayat;
-        //     $escort->save();
-        //     $idlansia = $escort->id;
-        // } 
-        // if ($request->lansiauses == 'baru') {
-        //     $escort = new Lansia;
-        //     $escort->nama = $request->nama;
-        //     $escort->umur = $request->umur;
-        //     $escort->gender = $request->gender;
-        //     $escort->hobi = $request->hobi;
-        //     $escort->riwayat = $request->riwayat;
-        //     $escort->save();
-        //     $idlansia = $escort->id;
-        // }
-        // if ($request->lansiauses == 'lama' && !$request->lansia_id) {
-        //     $idlansia = $request->lansia_id;
-        // } 
 
         $transaksi = new Transaksi;
         $transaksi->paket = $request->paket;
@@ -231,16 +208,6 @@ class TransaksiController extends Controller
             return response()->json(['success' => $transaksi], $this->successStatus);
         }
     }
-    // public function statusDiterima($id)
-    // {
-    //     $transaksi = Transaksi::where('user_id',$id)
-    //     ->join('esccorts', 'transaksis.esccort_id', '=', 'esccorts.id')
-    //     ->where('status','diterima')
-    //     ->select('transaksis.id AS idtrans','esccorts.id AS idesccort','transaksis.*','esccorts.*')
-    //     ->get();
-        
-    //     return response()->json(['success' => $transaksi], $this->successStatus);
-    // }
     public function uploadBuktiTransaksi(Request $request)
     {
         $image = $request->file('bukti_foto');
@@ -249,8 +216,6 @@ class TransaksiController extends Controller
             return response()->json(['error' => 'kamu belum upload foto']);
         }
         else {
-        // $transaksi = Transaksi::where('id', $request->id)->get();
-
         $new_name = 'buktitransaksi' . $request->id . '-' . rand(11111, 99999)  . '.' . $image->getClientOriginalExtension();
 
         $image->move(public_path('buktiPhotos'), $new_name); 
@@ -312,9 +277,6 @@ class TransaksiController extends Controller
             ]
         ]);
 
-        // return response()->json($response->body());
-        // return response()->json($token->notif_token);
-            
         return response()->json(['success' => 'Data Berhasil Diupdate']);
     }
     public function getPesanCg(Request $request)

@@ -15,53 +15,53 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'admin1',
-            'email' => 'admin1@admin.com',
-            'password' => 'password',
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'bcrypt("password")',
             'age' => 22,
-            'address' => 'jalanmanaaja',
-            'gender' => 'laki-laki',
-            'phone' => 86282,
+            'address' => 'Kota Semarang',
+            'gender' => 'L',
+            'phone' => '089456756421',
         ]);
 
         DB::table('users')->insert([
             'name' => 'admin2',
             'email' => 'admin2@admin.com',
-            'password' => 'password',
+            'password' => 'bcrypt("password")',
             'age' => 22,
-            'address' => 'jalanmanaaja',
-            'gender' => 'laki-laki',
-            'phone' => 86282,
+            'address' => 'Semarang',
+            'gender' => 'L',
+            'phone' => '089545667542',
         ]);
 
         DB::table('users')->insert([
             'name' => 'esccort',
             'email' => 'esccort@esccort.com',
-            'password' => 'password',
+            'password' => 'bcrypt("password")',
             'age' => 12,
-            'address' => 'jalanmaanaaja',
-            'gender' => 'Perempuan',
-            'phone' => 862822582,
+            'address' => 'Kota Semarang',
+            'gender' => 'P',
+            'phone' => '08975465575',
         ]);
 
         DB::table('users')->insert([
             'name' => 'esccort1',
             'email' => 'esccort1@esccort.com',
-            'password' => 'password',
+            'password' => 'bcrypt("password")',
             'age' => 42,
-            'address' => 'jalanqmaanaaja',
-            'gender' => 'Perempuan',
-            'phone' => 8628222582,
+            'address' => 'Kota Semarang',
+            'gender' => 'P',
+            'phone' => '089547547542',
         ]);
 
         DB::table('users')->insert([
             'name' => 'customer',
             'email' => 'customer@customer.com',
-            'password' => 'password',
+            'password' => 'bcrypt("password")',
             'age' => 12,
-            'address' => 'jalanmaanaaaja',
-            'gender' => 'Perempuan',
-            'phone' => 86282952582,
+            'address' => 'Kota Semarang',
+            'gender' => 'P',
+            'phone' => '086282952582',
         ]);
     }
 }

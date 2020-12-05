@@ -12,25 +12,25 @@ class EsccortsTableSeeder extends Seeder
     public function run()
     {
         DB::table('esccorts')->insert([
-            'salary' => '40000',
-            'keahlian' => 'mencuci',
-            'name' => 'okegays',
+            'salary' => '2000000',
+            'keahlian' => 'Care Giver',
+            'name' => 'Bambang',
             'age' => 22,
-            'address' => 'jalanmanaaja',
-            'gender' => 'laki-laki',
-            'phone' => 86282,
-            'rating' => 4,
+            'address' => 'Kota Semarang',
+            'gender' => 'L',
+            'phone' => '086542147564',
+            'user_id' => 3,
         ]);
 
         DB::table('esccorts')->insert([
-            'salary' => '40000',
-            'keahlian' => 'memasak',
-            'name' => 'kamuiyakamu',
-            'age' => 18,
-            'address' => 'pentingnyaman',
-            'gender' => 'perempuan',
-            'phone' => 869878282,
-            'rating' => 4,
+            'salary' => '2000000',
+            'keahlian' => 'Care Giver',
+            'name' => 'Tuti',
+            'age' => 22,
+            'address' => 'Kota Semarang',
+            'gender' => 'L',
+            'phone' => '089513243243',
+            'user_id' => 4,
         ]);
     }
 }
